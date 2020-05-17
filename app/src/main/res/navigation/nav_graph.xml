@@ -3,26 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/listaDoadores">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/listaDoadores"
         android:name="com.example.facaobemv03.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_ListaDoadores">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/AdicionaDoadores" />
+        <action
+            android:id="@+id/action_listaDoadores_to_alteradoadores"
+            app:destination="@id/alteradoadores" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/AdicionaDoadores"
         android:name="com.example.facaobemv03.SecondFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_adicionadoadores">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/listaDoadores" />
+    </fragment>
+    <fragment
+        android:id="@+id/alteradoadores"
+        android:name="com.example.facaobemv03.alteradoadores"
+        android:label="fragment_alteradoadores"
+        tools:layout="@layout/fragment_alteradoadores" >
+        <action
+            android:id="@+id/action_alteradoadores_to_listaDoadores"
+            app:destination="@id/listaDoadores" />
     </fragment>
 </navigation>
