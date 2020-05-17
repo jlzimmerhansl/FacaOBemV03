@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">FacaOBemV03</string>
     <string name="btn_Iniciar">Iniciar</string>
+    <string name="title_activity_doador">Doador</string>
+    <string name="title_menu_ok">OK</string>
+    <string name="action_menu_cancelar">Cancelar</string>
 </resources>
