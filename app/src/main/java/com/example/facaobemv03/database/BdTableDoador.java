@@ -14,6 +14,8 @@ public class BdTableDoador implements BaseColumns {
     public static final String CAMPO_EMAIL = "emaildoador";
     public static final String CAMPO_TELEFONE = "telefonedoador";
 
+    public static final String[] TODOS_CAMPOS = new String[]{_ID, CAMPO_NOME_DOADOR, CAMPO_DATA, CAMPO_EMAIL, CAMPO_TELEFONE};
+
     private final SQLiteDatabase db;
 
     public BdTableDoador(SQLiteDatabase db){
