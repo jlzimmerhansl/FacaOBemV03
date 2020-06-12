@@ -8,12 +8,12 @@
 
 </h1>  
 <p align="center">
-     <a href="https://rocketseat.com.br">
-    <img alt="Made by Rocketseat" src="https://img.shields.io/github/repo-size/jlzimmerhansl/FacaOBemV03?style=plastic">
+     <a href="http://github.com/jlzimmerhansl/FacaOBemV03">
+    <img alt="GitHub" src="https://img.shields.io/github/repo-size/jlzimmerhansl/FacaOBemV03?style=plastic">
   </a>    
                                                                                                          
-  <a href="https://rocketseat.com.br">
-    <img alt="Made by Rocketseat" src="https://img.shields.io/github/last-commit/jlzimmerhansl/FacaOBemV03?style=plastic">
+  <a href="http://github.com/jlzimmerhansl/FacaOBemV03">
+    <img alt="Last-Commit" src="https://img.shields.io/github/last-commit/jlzimmerhansl/FacaOBemV03?style=plastic">
   </a>  
 </p>      
 
