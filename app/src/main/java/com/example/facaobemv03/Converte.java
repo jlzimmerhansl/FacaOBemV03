@@ -3,7 +3,9 @@ package com.example.facaobemv03;
 import android.content.ContentValues;
 
 import com.example.facaobemv03.Models.DoadorModelo;
+import com.example.facaobemv03.Models.ProdutoModelo;
 import com.example.facaobemv03.database.BdTableDoador;
+import com.example.facaobemv03.database.BdTableProduto;
 
 public class Converte {
 
@@ -31,4 +33,26 @@ public class Converte {
 
         return doador;
     }
+
+    public static ContentValues produtoToContentValues(ProdutoModelo produtoModelo){
+        ContentValues valores = new ContentValues();
+
+        valores.put(BdTableProduto.NOME_PRODUTO, produtoModelo.getNomeProduto());
+        valores.put(BdTableProduto.QUANTIDADE_PRODUTO, produtoModelo.getQuantidade());
+        valores.put(BdTableProduto.DOADOR_ID, produtoModelo.getIdDoador());
+
+        return valores;
+    }
+
+    public static  ProdutoModelo contentValuesToProduto(ContentValues valores){
+        ProdutoModelo produtoModelo = new ProdutoModelo();
+
+        produtoModelo.setId((valores.getAsLong(BdTableProduto._ID)));
+        produtoModelo.setNomeProduto(valores.getAsString(BdTableProduto.NOME_PRODUTO));
+        produtoModelo.setQuantidade(valores.getAsLong(BdTableProduto.QUANTIDADE_PRODUTO));
+        produtoModelo.setIdDoador(valores.getAsLong(BdTableProduto.DOADOR_ID));
+
+        return produtoModelo;
+    }
+
 }

@@ -6,12 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.facaobemv03.Models.DoadorModelo;
+import com.example.facaobemv03.Models.ProdutoModelo;
 import com.example.facaobemv03.database.BdFacaOBemOpenHelper;
 import com.example.facaobemv03.database.BdTableDoador;
+import com.example.facaobemv03.database.BdTableProduto;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +30,7 @@ import static org.junit.Assert.*;
 public class BdFacaOBemTest {
 
     @Before
+    @After
     public void apagarBaseDeDados(){
         getTargetContext().deleteDatabase(BdFacaOBemOpenHelper.NOME_BASE_DADOS);
     }
@@ -74,6 +78,28 @@ public class BdFacaOBemTest {
         return id;
     }
 
+    private long insereDoadorNome(BdTableDoador tableDoador, String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
+        DoadorModelo doadorModelo = new DoadorModelo();
+        doadorModelo.setNomeDoador(nomeDoador);
+
+        return insereDoadorModelo(tableDoador, doadorModelo);
+    }
+
+    private long insereProduto(SQLiteDatabase bdFacaOBem, String nomeProduto, long qtdProduto,  String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
+        BdTableDoador tableDoador = new BdTableDoador(bdFacaOBem);
+        long idDoador = insereDoadorModelo(tableDoador, nomeDoador, dataDoacao, emailDoador, telefoneDoador);
+
+        ProdutoModelo produtoModelo = new ProdutoModelo();
+        produtoModelo.setNomeProduto(nomeProduto);
+        produtoModelo.setQuantidade(qtdProduto);
+        produtoModelo.setIdDoador(idDoador);
+
+        BdTableProduto tableProduto = new BdTableProduto(bdFacaOBem);
+        long id = tableProduto.insert((Converte.produtoToContentValues(produtoModelo)));
+        assertNotEquals(-1, id);
+
+        return id;
+    }
 
     @Test
     public void consegueInserirDoador(){
@@ -152,5 +178,16 @@ public class BdFacaOBemTest {
         assertEquals(1, registrosApagados);
         bdFacaOBem.close();
 
+    }
+
+    @Test
+    public void consegueInserirProduto(){
+        Context appContext = getTargetContext();
+
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        insereProduto(bdFacaOBem, "Alcool", 30, "Janos", "30/05/2020", "contato@gmail.com", "925456888");
+        bdFacaOBem.close();
     }
 }
