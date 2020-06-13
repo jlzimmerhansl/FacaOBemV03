@@ -12,6 +12,8 @@ public class BdTableProduto implements BaseColumns {
     public static final String QUANTIDADE_PRODUTO = "qtdProduto";
     public static final String DOADOR_ID = "doador";
 
+    public static final String[] TODOS_CAMPOS = new String[]{_ID, NOME_PRODUTO, QUANTIDADE_PRODUTO, DOADOR_ID};
+
     public BdTableProduto(SQLiteDatabase db){
         this.db = db;
     }

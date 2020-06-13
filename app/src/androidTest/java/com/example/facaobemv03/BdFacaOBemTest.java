@@ -193,4 +193,27 @@ public class BdFacaOBemTest {
         insereProduto(bdFacaOBem, "Alcool", 30, "Janos", "30/05/2020", "contato@gmail.com", "925456888");
         bdFacaOBem.close();
     }
+
+    @Test
+    public void consegueLerProduto(){
+        Context appContext = getTargetContext();
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        BdTableProduto tableProduto = new BdTableProduto(bdFacaOBem);
+
+        Cursor cursor = tableProduto.query(BdTableProduto.TODOS_CAMPOS, null, null, null, null, null);
+        int registros = cursor.getCount();
+        cursor.close();
+
+        insereProduto(bdFacaOBem, "Mascara", 40, "Maria", "15/05/2020", "contato@gmail.com", "925456654");
+
+        cursor = tableProduto.query(BdTableProduto.TODOS_CAMPOS,null, null, null, null, null);
+
+        assertEquals(registros + 1, cursor.getCount());
+        cursor.close();
+
+        bdFacaOBem.close();
+
+    }
 }
