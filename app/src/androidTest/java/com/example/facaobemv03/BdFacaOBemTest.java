@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.facaobemv03.Models.DoadorModelo;
+import com.example.facaobemv03.Models.ProdutoDetalheModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
 import com.example.facaobemv03.database.BdFacaOBemOpenHelper;
 import com.example.facaobemv03.database.BdTableDoador;
 import com.example.facaobemv03.database.BdTableProduto;
+import com.example.facaobemv03.database.BdTableProdutoDetalhe;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -103,6 +105,42 @@ public class BdFacaOBemTest {
 
         return id;
     }
+
+    private long inserProdutoTabela(BdTableDoador tableDoador, BdTableProduto tableProduto, String nomeProduto, long qtdProduto,  String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
+
+        long idDoador = insereDoadorNome(tableDoador, nomeDoador, dataDoacao, emailDoador, telefoneDoador);
+
+        ProdutoModelo produtoModelo = new ProdutoModelo();
+        produtoModelo.setNomeProduto(nomeProduto);
+        produtoModelo.setQuantidade(qtdProduto);
+        produtoModelo.setIdDoador(idDoador);
+
+
+        long id = tableProduto.insert((Converte.produtoToContentValues(produtoModelo)));
+        assertNotEquals(-1, id);
+
+        return id;
+    }
+
+    private long insereProdutoDetalhe(SQLiteDatabase bdFacaOBem, String marcaProduto, String descricaoProduto, String nomeProduto, long qtdProduto,String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
+        BdTableDoador tableDoador = new BdTableDoador(bdFacaOBem);
+        BdTableProduto tableProduto = new BdTableProduto(bdFacaOBem);
+
+        long idProdutoDetalhe = inserProdutoTabela(tableDoador, tableProduto, nomeProduto, qtdProduto, nomeDoador, dataDoacao, emailDoador, telefoneDoador);
+
+        ProdutoDetalheModelo produtoDetalheModelo = new ProdutoDetalheModelo();
+
+        produtoDetalheModelo.setMarcaProduto(marcaProduto);
+        produtoDetalheModelo.setDescricao(descricaoProduto);
+        produtoDetalheModelo.setIdProduto(idProdutoDetalhe);
+
+        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(bdFacaOBem);
+        long id = tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
+        assertNotEquals(-1, id);
+
+        return id;
+    }
+
 
     @Test
     public void consegueInserirDoador(){
@@ -254,6 +292,18 @@ public class BdFacaOBemTest {
 
         int registrosApagados = tableProduto.delete(BdTableProduto._ID + "= ?", new String[]{String.valueOf(idProduto)});
         assertEquals(1, registrosApagados);
+        bdFacaOBem.close();
+    }
+
+    @Test
+    public void consegueInserirProdutoDetalhe(){
+        Context appContext = getTargetContext();
+
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        insereProdutoDetalhe(bdFacaOBem, "LightClean", "Recebemos 30 unidades", "Luva", 40, "Fernada", "04/05/2020", "contato@light.com.br", "867594665");
+
         bdFacaOBem.close();
     }
 }
