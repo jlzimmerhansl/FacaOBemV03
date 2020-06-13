@@ -81,13 +81,16 @@ public class BdFacaOBemTest {
     private long insereDoadorNome(BdTableDoador tableDoador, String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
         DoadorModelo doadorModelo = new DoadorModelo();
         doadorModelo.setNomeDoador(nomeDoador);
+        doadorModelo.setDataDoacao(dataDoacao);
+        doadorModelo.setEmailDoador(emailDoador);
+        doadorModelo.setTelefoneDoador(telefoneDoador);
 
         return insereDoadorModelo(tableDoador, doadorModelo);
     }
 
     private long insereProduto(SQLiteDatabase bdFacaOBem, String nomeProduto, long qtdProduto,  String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
         BdTableDoador tableDoador = new BdTableDoador(bdFacaOBem);
-        long idDoador = insereDoadorModelo(tableDoador, nomeDoador, dataDoacao, emailDoador, telefoneDoador);
+        long idDoador = insereDoadorNome(tableDoador, nomeDoador, dataDoacao, emailDoador, telefoneDoador);
 
         ProdutoModelo produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto(nomeProduto);

@@ -19,6 +19,9 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         BdTableDoador tableDoador =  new BdTableDoador(database);
         tableDoador.cria();
+
+        BdTableProduto tableProduto = new BdTableProduto(database);
+        tableProduto.cria();
     }
 
     @Override
