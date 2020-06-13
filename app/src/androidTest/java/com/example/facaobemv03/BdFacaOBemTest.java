@@ -214,6 +214,31 @@ public class BdFacaOBemTest {
         cursor.close();
 
         bdFacaOBem.close();
+    }
 
+    @Test
+    public void consegueAlterarProduto(){
+        Context appContext = getTargetContext();
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        long idProduto = insereProduto(bdFacaOBem, "Luva", 150, "João", "09/05/2020", "joao@gmail.com", "975346777");
+
+        BdTableProduto tableProduto = new BdTableProduto(bdFacaOBem);
+        Cursor cursorProdutos = tableProduto.query(BdTableProduto.TODOS_CAMPOS, BdTableProduto._ID + "=?", new String[]{String.valueOf(idProduto)}, null, null, null);
+        assertEquals(1, cursorProdutos.getCount());
+
+        assertTrue(cursorProdutos.moveToNext());
+
+        ProdutoModelo produtoModelo = Converte.cursorToProduto(cursorProdutos);
+
+        assertEquals("Luva", produtoModelo.getNomeProduto());
+        cursorProdutos.close();
+
+        produtoModelo.setNomeProduto("LuvaSilicone");
+
+        int registrosAlterados = tableProduto.update(Converte.produtoToContentValues(produtoModelo), BdTableProduto._ID + "=?", new String[]{String.valueOf(produtoModelo.getId())});
+        assertEquals(1, registrosAlterados);
+        bdFacaOBem.close();
     }
 }

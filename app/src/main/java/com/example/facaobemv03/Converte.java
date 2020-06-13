@@ -1,6 +1,7 @@
 package com.example.facaobemv03;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
@@ -54,5 +55,17 @@ public class Converte {
 
         return produtoModelo;
     }
+
+    public static ProdutoModelo cursorToProduto(Cursor cursor){
+        ProdutoModelo produtoModelo = new ProdutoModelo();
+
+        produtoModelo.setId(cursor.getInt(cursor.getColumnIndex(BdTableProduto._ID)));
+        produtoModelo.setNomeProduto((cursor.getString(cursor.getColumnIndex(BdTableProduto.NOME_PRODUTO))));
+        produtoModelo.setQuantidade(cursor.getInt(cursor.getColumnIndex(BdTableProduto.QUANTIDADE_PRODUTO)));
+        produtoModelo.setIdDoador(cursor.getInt(cursor.getColumnIndex(BdTableProduto.DOADOR_ID)));
+
+        return produtoModelo;
+    }
+
 
 }
