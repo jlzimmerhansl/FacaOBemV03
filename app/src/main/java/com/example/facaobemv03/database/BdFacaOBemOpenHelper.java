@@ -22,6 +22,9 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
 
         BdTableProduto tableProduto = new BdTableProduto(database);
         tableProduto.cria();
+
+        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(database);
+        tableProdutoDetalhe.cria();
     }
 
     @Override
