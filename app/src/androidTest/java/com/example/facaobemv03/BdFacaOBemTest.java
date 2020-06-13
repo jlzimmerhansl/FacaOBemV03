@@ -306,6 +306,29 @@ public class BdFacaOBemTest {
 
         bdFacaOBem.close();
     }
+
+    @Test
+    public void consegueLerProdutoDetalhe(){
+        Context appContext = getTargetContext();
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(bdFacaOBem);
+
+        Cursor cursor = tableProdutoDetalhe.query(BdTableProdutoDetalhe.TODOS_CAMPOS, null, null, null, null, null);
+        int registros = cursor.getCount();
+        cursor.close();
+
+        insereProdutoDetalhe(bdFacaOBem, "LightClean", "Recebemos 30 unidades", "Luva", 40, "Fernada", "04/05/2020", "contato@light.com.br", "867594665");
+
+        cursor = tableProdutoDetalhe.query(BdTableProdutoDetalhe.TODOS_CAMPOS, null, null, null, null, null);
+        assertEquals(registros + 1, cursor.getCount());
+        cursor.close();
+
+        bdFacaOBem.close();
+
+    }
+
     @Test
     public void consegueAlterarProdutoDetahe(){
         Context appContext = getTargetContext();
