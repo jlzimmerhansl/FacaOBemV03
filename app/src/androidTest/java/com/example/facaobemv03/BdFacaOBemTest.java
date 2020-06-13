@@ -306,4 +306,28 @@ public class BdFacaOBemTest {
 
         bdFacaOBem.close();
     }
+    @Test
+    public void consegueAlterarProdutoDetahe(){
+        Context appContext = getTargetContext();
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        long idProdutoDetalhe = insereProdutoDetalhe(bdFacaOBem, "Cien", "Esse produto deve ser direcionado ao centro de ajuda", "Alcool", 200, "Cintia", "13/06/2020", "contato@cien.com.br", "867599886");
+
+        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(bdFacaOBem);
+        Cursor cursorProdutoDetalhe = tableProdutoDetalhe.query(BdTableProdutoDetalhe.TODOS_CAMPOS, BdTableProdutoDetalhe._ID + " =?", new String[]{String.valueOf(idProdutoDetalhe)}, null, null, null);
+        assertEquals(1, cursorProdutoDetalhe.getCount());
+
+        assertTrue(cursorProdutoDetalhe.moveToNext());
+
+        ProdutoDetalheModelo produtoDetalheModelo = Converte.cursorToProdutoDetalhe(cursorProdutoDetalhe);
+        assertEquals("Cien", produtoDetalheModelo.getMarcaProduto());
+        cursorProdutoDetalhe.close();
+
+        produtoDetalheModelo.setMarcaProduto("Cien LTDA");
+
+        int registrosAlterados = tableProdutoDetalhe.update(Converte.produtoDetalheToContentValues(produtoDetalheModelo), BdTableProdutoDetalhe._ID + " =?", new String[]{String.valueOf(produtoDetalheModelo.getId())});
+        assertEquals(1, registrosAlterados);
+        bdFacaOBem.close();
+    }
 }

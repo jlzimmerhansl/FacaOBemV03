@@ -91,4 +91,15 @@ public class Converte {
         return produtoDetalheModelo;
     }
 
+    public static ProdutoDetalheModelo cursorToProdutoDetalhe(Cursor cursor){
+        ProdutoDetalheModelo produtoDetalheModelo = new ProdutoDetalheModelo();
+
+        produtoDetalheModelo.setId(cursor.getInt(cursor.getColumnIndex(BdTableProdutoDetalhe._ID)));
+        produtoDetalheModelo.setMarcaProduto(cursor.getString(cursor.getColumnIndex(BdTableProdutoDetalhe.CAMPO_MARCA)));
+        produtoDetalheModelo.setDescricao(cursor.getString(cursor.getColumnIndex(BdTableProdutoDetalhe.CAMPO_DESCRICAO)));
+        produtoDetalheModelo.setIdProduto(cursor.getInt(cursor.getColumnIndex(BdTableProdutoDetalhe.CAMPO_ID_PRODUTO)));
+
+        return produtoDetalheModelo;
+    }
+
 }
