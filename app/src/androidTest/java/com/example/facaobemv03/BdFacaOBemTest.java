@@ -353,4 +353,18 @@ public class BdFacaOBemTest {
         assertEquals(1, registrosAlterados);
         bdFacaOBem.close();
     }
+
+    @Test
+    public void consegueApagarProdutoDetalhe(){
+        Context appContext = getTargetContext();
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        long id = insereProdutoDetalhe(bdFacaOBem, "Cien", "Esse produto deve ser direcionado ao centro de ajuda", "Alcool", 200, "Cintia", "13/06/2020", "contato@cien.com.br", "867599886");
+
+        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(bdFacaOBem);
+        int registroApagados = tableProdutoDetalhe.delete(BdTableProdutoDetalhe._ID + " =?", new String[]{String.valueOf(id)});
+        assertEquals(1, registroApagados);
+        bdFacaOBem.close();
+    }
 }
