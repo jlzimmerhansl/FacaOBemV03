@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.example.facaobemv03.Models.DoadorModelo;
+import com.example.facaobemv03.Models.ProdutoDetalheModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
 import com.example.facaobemv03.database.BdTableDoador;
 import com.example.facaobemv03.database.BdTableProduto;
+import com.example.facaobemv03.database.BdTableProdutoDetalhe;
 
 public class Converte {
 
@@ -67,5 +69,26 @@ public class Converte {
         return produtoModelo;
     }
 
+    public static ContentValues produtoDetalheToContentValues(ProdutoDetalheModelo produtoDetalheModelo){
+        ContentValues valores = new ContentValues();
+
+        valores.put(BdTableProdutoDetalhe.CAMPO_MARCA, produtoDetalheModelo.getMarcaProduto());
+        valores.put(BdTableProdutoDetalhe.CAMPO_DESCRICAO, produtoDetalheModelo.getDescricao());
+        valores.put(BdTableProdutoDetalhe.CAMPO_ID_PRODUTO, produtoDetalheModelo.getIdProduto());
+
+        return valores;
+
+    }
+
+    public static ProdutoDetalheModelo contentToProdutoDetalhe(ContentValues valores){
+        ProdutoDetalheModelo produtoDetalheModelo = new ProdutoDetalheModelo();
+
+        produtoDetalheModelo.setId(valores.getAsLong(BdTableProdutoDetalhe._ID));
+        produtoDetalheModelo.setMarcaProduto(valores.getAsString(BdTableProdutoDetalhe.CAMPO_MARCA));
+        produtoDetalheModelo.setDescricao(valores.getAsString(BdTableProdutoDetalhe.CAMPO_DESCRICAO));
+        produtoDetalheModelo.setIdProduto(valores.getAsLong(BdTableProdutoDetalhe.CAMPO_ID_PRODUTO));
+
+        return produtoDetalheModelo;
+    }
 
 }
