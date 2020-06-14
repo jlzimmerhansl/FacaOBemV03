@@ -4,14 +4,16 @@
 
 
     <item
-        android:id="@+id/action_menu_ok"
+        android:id="@+id/action_guardar_doador"
+        android:icon="@drawable/ic_save_black_24dp"
         android:orderInCategory="1"
         android:title="@string/title_menu_ok"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_menu_cancelar"
-        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_cancel_black_24dp"
         android:orderInCategory="2"
-        android:title="@string/action_menu_cancelar" />
+        android:title="@string/action_menu_cancelar"
+        app:showAsAction="ifRoom" />
 
 </menu>
