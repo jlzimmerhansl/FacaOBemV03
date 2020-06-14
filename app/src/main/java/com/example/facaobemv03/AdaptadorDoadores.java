@@ -1,3 +1,5 @@
+package com.example.facaobemv03;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
@@ -6,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.facaobemv03.Converte;
 import com.example.facaobemv03.Models.DoadorModelo;
-import com.example.facaobemv03.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
