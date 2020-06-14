@@ -20,6 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.example.facaobemv03"
+            android:name=".FacaOBemrContentProvider"
+            android:exported="false"
+         />
     </application>
 
 </manifest>

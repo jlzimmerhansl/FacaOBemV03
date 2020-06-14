@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
+import com.example.facaobemv03.database.BdTableDoador;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -65,7 +67,7 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new CursorLoader(getContext());
+        return new CursorLoader(getContext(), FacaOBemrContentProvider.ENDERECO_DOADOR, BdTableDoador.TODOS_CAMPOS, null, null, BdTableDoador.CAMPO_NOME_DOADOR);
     }
 
     /**
@@ -111,7 +113,7 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
      */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-
+        adaptadorDoadores.setCursor(data);
     }
 
     /**
@@ -125,6 +127,7 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
      */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        adaptadorDoadores.setCursor(null);
 
     }
 }
