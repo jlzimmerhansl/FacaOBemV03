@@ -5,4 +5,5 @@
     <string name="title_activity_doador">Doador</string>
     <string name="title_menu_ok">OK</string>
     <string name="action_menu_cancelar">Cancelar</string>
+    <string name="textViewTituloDoadores">Doadores</string>
 </resources>
