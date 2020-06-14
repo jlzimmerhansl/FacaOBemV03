@@ -37,6 +37,18 @@ public class Converte {
         return doador;
     }
 
+    public static DoadorModelo cursorToDoador(Cursor cursor){
+        DoadorModelo doadorModelo = new DoadorModelo();
+
+        doadorModelo.setId(cursor.getInt(cursor.getColumnIndex(BdTableDoador._ID)));
+        doadorModelo.setNomeDoador(cursor.getString(cursor.getColumnIndex(BdTableDoador.CAMPO_NOME_DOADOR)));
+        doadorModelo.setDataDoacao(cursor.getString(cursor.getColumnIndex(BdTableDoador.CAMPO_DATA)));
+        doadorModelo.setEmailDoador(cursor.getString(cursor.getColumnIndex(BdTableDoador.CAMPO_EMAIL)));
+        doadorModelo.setTelefoneDoador(cursor.getString(cursor.getColumnIndex(BdTableDoador.CAMPO_TELEFONE)));
+
+        return doadorModelo;
+    }
+
     public static ContentValues produtoToContentValues(ProdutoModelo produtoModelo){
         ContentValues valores = new ContentValues();
 

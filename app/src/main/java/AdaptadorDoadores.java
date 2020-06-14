@@ -1,9 +1,12 @@
 import android.content.Context;
+import android.database.Cursor;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.facaobemv03.Converte;
 import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.R;
 
@@ -12,9 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.ViewHolderDoadores> {
 
+    private final Context context;
+
+    private Cursor cursor= null;
+
+    public AdaptadorDoadores(Context context) {
+        this.context = context;
+    }
+
+    public void setCursor(Cursor cursor){
+        if(cursor != this.cursor){
+            this.cursor = cursor;
+            notifyDataSetChanged();
+        }
+    }
 
     /**
-     * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
+     * Called when RecyclerView needs a new {@link ViewHolderDoadores} of the given type to represent
      * an item.
      * <p>
      * This new ViewHolder should be constructed with a new View that can represent the items
@@ -22,7 +39,7 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
      * layout file.
      * <p>
      * The new ViewHolder will be used to display items of the adapter using
-     * {@link #onBindViewHolder(ViewHolderDoadores, int, position)}. Since it will be re-used to display
+     * {@link #onBindViewHolder(ViewHolderDoadores, int position)}. Since it will be re-used to display
      * different items in the data set, it is a good idea to cache references to sub views of
      * the View to avoid unnecessary {@link View#findViewById(int)} calls.
      *
@@ -36,7 +53,8 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
     @NonNull
     @Override
     public ViewHolderDoadores onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View itemDOador = LayoutInflater.from(context).inflate(R.layout.item_doador, parent, false);
+        return new ViewHolderDoadores(itemDOador);
     }
 
     /**
@@ -52,7 +70,7 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
      * on (e.g. in a click listener), use {@link ViewHolderDoadores#getAdapterPosition()} which will
      * have the updated adapter position.
      * <p>
-     * Override {@link #onBindViewHolder(ViewHolderDoadores, int, List)} instead if Adapter can
+     * Override {@link #onBindViewHolder(ViewHolderDoadores, int List)} instead if Adapter can
      * handle efficient partial bind.
      *
      * @param holder   The ViewHolder which should be updated to represent the contents of the
@@ -61,7 +79,9 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolderDoadores holder, int position) {
-
+        cursor.moveToPosition(position);
+        DoadorModelo doadorModelo = Converte.cursorToDoador(cursor);
+        holder.setDoador(doadorModelo);
     }
 
     /**
@@ -71,7 +91,9 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
      */
     @Override
     public int getItemCount() {
-        return 0;
+        if(cursor == null) return 0;
+
+        return cursor.getCount();
     }
 
     public class ViewHolderDoadores extends RecyclerView.ViewHolder {
