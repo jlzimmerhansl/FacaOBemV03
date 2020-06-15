@@ -19,6 +19,7 @@
 
 ### :bookmark: Sobre o Projeto
 
+
 Aplicativo desenvolvido para a aula de Programação avançada do curso Engenharia Informática - Instituto Politécnico da Guarda
 
 **Descrição:** O aplicativo proposto aborda a questão da solidariedade durante a quarentena devido ao COVID-19. Será um aplicativo de recebimento de doações. No aplicativo, serão cadastrados as doações e produtos recebidos, e funcionará como uma espécie de inventário para essas doações.
@@ -35,7 +36,7 @@ Aplicativo desenvolvido para a aula de Programação avançada do curso Engenhar
 ---
 
 <h4 align="center">
-    Feito com 💜  by Jessica Zimmerhansl :wave: <a href="www.linkedin.com/in/jessica-zimmerhansl" target="_blank">Entre em Contato!</a>
+    Feito com 💜  por Jessica Zimmerhansl :wave: <a href="www.linkedin.com/in/jessica-zimmerhansl" target="_blank">Entre em Contato!</a>
   
 </h4>
 
