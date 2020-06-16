@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.facaobemv03.Models.DoadorModelo;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +21,10 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
 
     private Cursor cursor= null;
 
-    public AdaptadorDoadores(Context context) {
+    private ClickInterface clickInterface;
+
+    public AdaptadorDoadores(Context context, ClickInterface clickInterface) {
+        this.clickInterface = clickInterface;
         this.context = context;
     }
 
@@ -53,8 +58,8 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
     @NonNull
     @Override
     public ViewHolderDoadores onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemDOador = LayoutInflater.from(context).inflate(R.layout.item_doador, parent, false);
-        return new ViewHolderDoadores(itemDOador);
+        View itemDoador = LayoutInflater.from(context).inflate(R.layout.item_doador, parent, false);
+        return new ViewHolderDoadores(itemDoador, clickInterface);
     }
 
     /**
@@ -82,6 +87,7 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
         cursor.moveToPosition(position);
         DoadorModelo doadorModelo = Converte.cursorToDoador(cursor);
         holder.setDoador(doadorModelo);
+
     }
 
     /**
@@ -96,16 +102,19 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
         return cursor.getCount();
     }
 
-    public class ViewHolderDoadores extends RecyclerView.ViewHolder {
+    public class ViewHolderDoadores extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView TextViewNomeDoador;
         private final TextView TextViewDataDoacao;
         private DoadorModelo doadorModelo = null;
+        ClickInterface clickInterface;
 
-        public ViewHolderDoadores(@NonNull View itemView) {
+        public ViewHolderDoadores(@NonNull View itemView, ClickInterface clickInterface) {
             super(itemView);
 
             TextViewNomeDoador = (TextView) itemView.findViewById(R.id.textViewNomeDoador);
             TextViewDataDoacao = (TextView) itemView.findViewById(R.id.textViewDataDoacao);
+            this.clickInterface = clickInterface;
+            itemView.setOnClickListener(this);
         }
 
         public void setDoador(DoadorModelo doadorModelo){
@@ -113,6 +122,18 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
 
             TextViewNomeDoador.setText(doadorModelo.getNomeDoador());
             TextViewDataDoacao.setText(doadorModelo.getDataDoacao());
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            clickInterface.recyclerviewOnClick(getAdapterPosition());
         }
     }
+
+    public interface ClickInterface {
+
+        public void recyclerviewOnClick(int position);
+    }
+
 }

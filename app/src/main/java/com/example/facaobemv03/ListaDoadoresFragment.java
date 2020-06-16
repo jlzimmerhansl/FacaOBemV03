@@ -3,13 +3,16 @@ package com.example.facaobemv03;
 import android.content.Context;
 
 import android.database.Cursor;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
 import com.example.facaobemv03.database.BdTableDoador;
+import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,8 +27,9 @@ import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.CursorLoader;
 
 
-public class ListaDoadoresFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ListaDoadoresFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdaptadorDoadores.ClickInterface {
 
+    private static final String TAG =  "clicked";
     private AdaptadorDoadores adaptadorDoadores;
     private int id_CursorLoader_Doadores = 0;
 
@@ -47,7 +51,7 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
 
 
         RecyclerView recyclerViewDoadores = (RecyclerView) view.findViewById(R.id.RecycleViewDoadores);
-        adaptadorDoadores = new AdaptadorDoadores(context);
+        adaptadorDoadores = new AdaptadorDoadores(context, this);
         recyclerViewDoadores.setAdapter(adaptadorDoadores);
         recyclerViewDoadores.setLayoutManager(new LinearLayoutManager(context));
 
@@ -128,6 +132,12 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         adaptadorDoadores.setCursor(null);
+
+    }
+
+    @Override
+    public void recyclerviewOnClick(int position) {
+        Log.d(TAG,"Clicked" + position );
 
     }
 }
