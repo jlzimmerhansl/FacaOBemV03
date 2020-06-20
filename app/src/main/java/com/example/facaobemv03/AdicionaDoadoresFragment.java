@@ -1,46 +1,34 @@
 package com.example.facaobemv03;
 
 import android.content.Context;
-
+import android.content.CursorLoader;
 import android.database.Cursor;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-
-import com.example.facaobemv03.database.BdTableDoador;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.loader.content.Loader;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.CursorLoader;
+import androidx.navigation.fragment.NavHostFragment;
 
+public class AdicionaDoadoresFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-public class ListaDoadoresFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdaptadorDoadores.ClickInterface {
-
-    private static final String TAG =  "clicked";
-    private AdaptadorDoadores adaptadorDoadores;
-    private int id_CursorLoader_Doadores = 0;
+    public static final int ID_CURSOR_CATEGORIA = 0;
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            LayoutInflater inflater,
+            ViewGroup container,
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_listadoadores, container, false);
+        return inflater.inflate(R.layout.fragment_adicionadoadores, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -50,28 +38,10 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
 
         Doador activity = (Doador) getActivity();
 
+        activity.setFragmentActual(this);
+        activity.setMenuActual(R.menu.menu_cadastrodoador);
 
-        RecyclerView recyclerViewDoadores = (RecyclerView) view.findViewById(R.id.RecycleViewDoadores);
-        adaptadorDoadores = new AdaptadorDoadores(context, this);
-        recyclerViewDoadores.setAdapter(adaptadorDoadores);
-        recyclerViewDoadores.setLayoutManager(new LinearLayoutManager(context));
-
-        adaptadorDoadores.setCursor(null);
-        LoaderManager.getInstance(this).initLoader(id_CursorLoader_Doadores, null,  this);
-    }
-
-    public void alteraDoador(){
-        NavController navController = NavHostFragment.findNavController(ListaDoadoresFragment.this);
-        navController.navigate(R.id.action_alterar_doador);
-    }
-
-    public void novoDoador(){
-        NavController navController = NavHostFragment.findNavController(ListaDoadoresFragment.this);
-        navController.navigate(R.id.action_inserir_doador);
-    }
-
-    public void deletarDoador(){
-
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_CATEGORIA, null, this);
     }
 
     /**
@@ -86,7 +56,7 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new CursorLoader(getContext(), FacaOBemrContentProvider.ENDERECO_DOADOR, BdTableDoador.TODOS_CAMPOS, null, null, BdTableDoador.CAMPO_NOME_DOADOR);
+        return null;
     }
 
     /**
@@ -132,7 +102,7 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
      */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        adaptadorDoadores.setCursor(data);
+
     }
 
     /**
@@ -146,13 +116,6 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
      */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        adaptadorDoadores.setCursor(null);
-
-    }
-
-    @Override
-    public void recyclerviewOnClick(int position) {
-        Log.d(TAG,"Clicked" + position );
 
     }
 }

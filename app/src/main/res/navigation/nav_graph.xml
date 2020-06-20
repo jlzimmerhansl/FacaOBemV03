@@ -9,18 +9,18 @@
         android:id="@+id/listaDoadores"
         android:name="com.example.facaobemv03.ListaDoadoresFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_ListaDoadores">
+        tools:layout="@layout/fragment_listadoadores">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/AdicionaDoadores" />
+            android:id="@+id/action_inserir_doador"
+            app:destination="@id/adicionadoadores" />
         <action
-            android:id="@+id/action_listaDoadores_to_alteradoadores"
+            android:id="@+id/action_alterar_doador"
             app:destination="@id/alteradoadores" />
     </fragment>
     <fragment
-        android:id="@+id/AdicionaDoadores"
-        android:name="com.example.facaobemv03.AdcionaDoadoresFragment"
+        android:id="@+id/adicionadoadores"
+        android:name="com.example.facaobemv03.AdicionaDoadoresFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_adicionadoadores">
 
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/alteradoadores"
-        android:name="com.example.facaobemv03.alteradoadores"
+        android:name="com.example.facaobemv03.alteraDoadoresFragment"
         android:label="fragment_alteradoadores"
         tools:layout="@layout/fragment_alteradoadores" >
         <action
