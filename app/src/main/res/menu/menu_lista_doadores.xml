@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_inserir_doador"
+        android:id="@+id/action_ListaDoadoresFragment_to_AdicionaDoadoresFragment"
         android:icon="@drawable/ic_add_black_24dp"
         android:title="Item"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_alterar_doador"
+        android:id="@+id/action_ListaDoadoresFragment_to_alteraDoadoresFragment"
         android:icon="@drawable/ic_edit_black_24dp"
         android:title="Item"
         app:showAsAction="ifRoom" />

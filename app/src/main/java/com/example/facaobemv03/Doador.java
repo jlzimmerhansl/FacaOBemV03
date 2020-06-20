@@ -45,7 +45,7 @@ public class Doador extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.action_inserir_doador){
+        if(id == R.id.action_ListaDoadoresFragment_to_AdicionaDoadoresFragment){
             ((ListaDoadoresFragment) fragmentActual).novoDoador();
             return true;
         }
@@ -58,10 +58,10 @@ public class Doador extends AppCompatActivity {
 
     public boolean processaOpcosMenuListaLivros(int id){
         ListaDoadoresFragment listaDoadoresFragment = (ListaDoadoresFragment) fragmentActual;
-        if(id == R.id.action_inserir_doador){
+        if(id == R.id.action_ListaDoadoresFragment_to_AdicionaDoadoresFragment){
             listaDoadoresFragment.novoDoador();
         }
-        else if(id == R.id.action_alterar_doador){
+        else if(id == R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment){
             listaDoadoresFragment.alteraDoador();
             return true;
         }

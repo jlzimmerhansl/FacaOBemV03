@@ -3,7 +3,6 @@ package com.example.facaobemv03;
 import android.content.Context;
 
 import android.database.Cursor;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
 import com.example.facaobemv03.database.BdTableDoador;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +22,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.loader.content.Loader;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.CursorLoader;
 
 
@@ -62,12 +59,12 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
 
     public void alteraDoador(){
         NavController navController = NavHostFragment.findNavController(ListaDoadoresFragment.this);
-        navController.navigate(R.id.action_alterar_doador);
+        navController.navigate(R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment);
     }
 
     public void novoDoador(){
         NavController navController = NavHostFragment.findNavController(ListaDoadoresFragment.this);
-        navController.navigate(R.id.action_inserir_doador);
+        navController.navigate(R.id.action_ListaDoadoresFragment_to_AdicionaDoadoresFragment);
     }
 
     public void deletarDoador(){

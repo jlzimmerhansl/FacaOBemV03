@@ -3,38 +3,95 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/listaDoadores">
+    app:startDestination="@id/ListaDoadoresFragment">
 
     <fragment
-        android:id="@+id/listaDoadores"
+        android:id="@+id/ListaDoadoresFragment"
         android:name="com.example.facaobemv03.ListaDoadoresFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_listadoadores">
 
         <action
-            android:id="@+id/action_inserir_doador"
-            app:destination="@id/adicionadoadores" />
+            android:id="@+id/action_ListaDoadoresFragment_to_AdicionaDoadoresFragment"
+            app:destination="@id/AdicionaDoadoresFragment" />
         <action
-            android:id="@+id/action_alterar_doador"
-            app:destination="@id/alteradoadores" />
+            android:id="@+id/action_ListaDoadoresFragment_to_alteraDoadoresFragment"
+            app:destination="@id/alteraDoadoresFragment" />
+        <action
+            android:id="@+id/action_ListaDoadoresFragment_to_eliminaDoadoresFragment"
+            app:destination="@id/eliminaDoadoresFragment" />
+        <action
+            android:id="@+id/action_ListaDoadoresFragment_to_LIstaProdutosFragment"
+            app:destination="@id/LIstaProdutosFragment" />
     </fragment>
     <fragment
-        android:id="@+id/adicionadoadores"
+        android:id="@+id/AdicionaDoadoresFragment"
         android:name="com.example.facaobemv03.AdicionaDoadoresFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_adicionadoadores">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/listaDoadores" />
+            android:id="@+id/action_AdicionaDoadoresFragment_to_ListaDoadoresFragment"
+            app:destination="@id/ListaDoadoresFragment" />
     </fragment>
     <fragment
-        android:id="@+id/alteradoadores"
+        android:id="@+id/alteraDoadoresFragment"
         android:name="com.example.facaobemv03.alteraDoadoresFragment"
         android:label="fragment_alteradoadores"
         tools:layout="@layout/fragment_alteradoadores" >
         <action
-            android:id="@+id/action_alteradoadores_to_listaDoadores"
-            app:destination="@id/listaDoadores" />
+            android:id="@+id/action_alteraDoadoresFragment_to_ListaDoadoresFragment"
+            app:destination="@id/ListaDoadoresFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eliminaDoadoresFragment"
+        android:name="com.example.facaobemv03.EliminaDoadoresFragment"
+        android:label="fragment_elimina_doadores"
+        tools:layout="@layout/fragment_elimina_doadores" >
+        <action
+            android:id="@+id/action_eliminaDoadoresFragment_to_ListaDoadoresFragment"
+            app:destination="@id/ListaDoadoresFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/LIstaProdutosFragment"
+        android:name="com.example.facaobemv03.LIstaProdutosFragment"
+        android:label="fragment_l_ista_produtos"
+        tools:layout="@layout/fragment_l_ista_produtos" >
+        <action
+            android:id="@+id/action_LIstaProdutosFragment_to_inserirProdutosFragment"
+            app:destination="@id/inserirProdutosFragment" />
+        <action
+            android:id="@+id/action_LIstaProdutosFragment_to_alterarProdutoFragment"
+            app:destination="@id/alterarProdutoFragment" />
+        <action
+            android:id="@+id/action_LIstaProdutosFragment_to_eliminaProdutoFragment"
+            app:destination="@id/eliminaProdutoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inserirProdutosFragment"
+        android:name="com.example.facaobemv03.InserirProdutosFragment"
+        android:label="fragment_inserir_produtos"
+        tools:layout="@layout/fragment_inserir_produtos" >
+        <action
+            android:id="@+id/action_inserirProdutosFragment_to_LIstaProdutosFragment"
+            app:destination="@id/LIstaProdutosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alterarProdutoFragment"
+        android:name="com.example.facaobemv03.AlterarProdutoFragment"
+        android:label="fragment_alterar_produto"
+        tools:layout="@layout/fragment_alterar_produto" >
+        <action
+            android:id="@+id/action_alterarProdutoFragment_to_LIstaProdutosFragment"
+            app:destination="@id/LIstaProdutosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eliminaProdutoFragment"
+        android:name="com.example.facaobemv03.EliminaProdutoFragment"
+        android:label="fragment_elimina_produto"
+        tools:layout="@layout/fragment_elimina_produto" >
+        <action
+            android:id="@+id/action_eliminaProdutoFragment_to_LIstaProdutosFragment"
+            app:destination="@id/LIstaProdutosFragment" />
     </fragment>
 </navigation>
