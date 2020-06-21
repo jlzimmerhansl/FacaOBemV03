@@ -1,13 +1,24 @@
 package com.example.facaobemv03;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.facaobemv03.Models.DoadorModelo;
+import com.example.facaobemv03.database.BdTableDoador;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +26,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.loader.content.CursorLoader;
 
 public class AdicionaDoadoresFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public static final int ID_CURSOR_CATEGORIA = 0;
+    private EditText nomeDoador;
+    private TextView lblDataSelecionada;
+    private Button btnDataSelecionada;
+    private int ano, mes, dia;
+    private EditText emailDoador;
+    private EditText telefoneDoador;
+
 
     @Override
     public View onCreateView(
@@ -41,7 +60,88 @@ public class AdicionaDoadoresFragment extends Fragment implements LoaderManager.
         activity.setFragmentActual(this);
         activity.setMenuActual(R.menu.menu_cadastrodoador);
 
-        LoaderManager.getInstance(this).initLoader(ID_CURSOR_CATEGORIA, null, this);
+        nomeDoador = (EditText) view.findViewById(R.id.inputNomeDoador);
+        lblDataSelecionada = (TextView) view.findViewById(R.id.lblDataSelecionada);
+        btnDataSelecionada = (Button) view.findViewById(R.id.btnSelecionaData);
+        emailDoador = (EditText) view.findViewById(R.id.inputEmailDoador);
+        telefoneDoador = (EditText) view.findViewById(R.id.inputTelefoneDoador);
+
+        view.findViewById(R.id.btnSelecionaData).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(view == btnDataSelecionada){
+                    final Calendar calendario = Calendar.getInstance();
+                    ano = calendario.get(Calendar.YEAR);
+                    mes = calendario.get(Calendar.MONTH);
+                    dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                            lblDataSelecionada.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        }
+                    }, ano, mes, dia);
+                    datePickerDialog.show();
+                }
+            }
+        });
+    }
+
+    public void cacelarCadastro(){
+        NavController navController = NavHostFragment.findNavController(AdicionaDoadoresFragment.this);
+        navController.navigate(R.id.action_AdicionaDoadoresFragment_to_ListaDoadoresFragment);
+        nomeDoador.setText("");
+        lblDataSelecionada.setText("");
+        emailDoador.setText("");
+        telefoneDoador.setText("");
+    }
+
+
+    public void cadastrarDoador(){
+        String nomeDoDoador = nomeDoador.getText().toString();
+        String dataDoacao = lblDataSelecionada.getText().toString();
+        String email = emailDoador.getText().toString();
+        String telefone = telefoneDoador.getText().toString();
+
+        if(nomeDoDoador.length() <= 0){
+            nomeDoador.setError(getString(R.string.msgErrorNomeDoador));
+            nomeDoador.requestFocus();
+            return;
+        }
+        else if(dataDoacao.length() <= 0){
+            lblDataSelecionada.setError(getString(R.string.msgErrorData));
+            lblDataSelecionada.requestFocus();
+            return;
+        }
+        else if(email.length() <= 0){
+            emailDoador.setError(getString(R.string.msgErrorEmailDoador));
+            emailDoador.requestFocus();
+            return;
+        }
+        else if(telefone.length() <= 0 ){
+            telefoneDoador.setError(getString(R.string.msgErrorTelefone));
+            telefoneDoador.requestFocus();
+            return;
+        }
+
+        DoadorModelo doadorModelo = new DoadorModelo();
+        doadorModelo.setNomeDoador(nomeDoDoador);
+        doadorModelo.setDataDoacao(dataDoacao);
+        doadorModelo.setEmailDoador(email);
+        doadorModelo.setTelefoneDoador(telefone);
+
+        try {
+            getActivity().getContentResolver().insert(FacaOBemrContentProvider.ENDERECO_DOADOR, Converte.doadorToContentValue(doadorModelo));
+            Toast.makeText(getContext(), R.string.msgDoadorInserido, Toast.LENGTH_SHORT).show();
+            NavController navController = NavHostFragment.findNavController(AdicionaDoadoresFragment.this);
+            navController.navigate(R.id.action_AdicionaDoadoresFragment_to_ListaDoadoresFragment);
+            nomeDoador.setText("");
+            lblDataSelecionada.setText("");
+            emailDoador.setText("");
+            telefoneDoador.setText("");
+        } catch (Exception e) {
+            Snackbar.make(nomeDoador, R.string.msgErrorInserirDoador, Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -56,7 +156,15 @@ public class AdicionaDoadoresFragment extends Fragment implements LoaderManager.
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return null;
+
+        return new CursorLoader(
+                getContext(),
+                FacaOBemrContentProvider.ENDERECO_DOADOR,
+                BdTableDoador.TODOS_CAMPOS,
+                null,
+                null,
+                BdTableDoador.CAMPO_NOME_DOADOR
+        );
     }
 
     /**

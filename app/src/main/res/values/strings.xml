@@ -16,4 +16,18 @@
     <string name="title_menu_ok">OK</string>
     <string name="action_menu_cancelar">Canceled</string>
     <string name="textViewTituloDoadores">Donors</string>
+    <string name="lblInserirDoador">Insert New Donor</string>
+    <string name="inputNomeDoador">Donor name:</string>
+    <string name="btnSelecionaData">Select date</string>
+    <string name="lblDataSelecionada">Selected Date</string>
+    <string name="inputDataSelecionada">Selected Date</string>
+    <string name="inputEmailDoador">Donor`s Email:</string>
+    <string name="lblTelefoneDoador">Donor\'s phone:</string>
+    <string name="inputTelefoneDoador">Donor\'s phone:</string>
+    <string name="msgErrorNomeDoador">Preencha o nome do Doador!</string>
+    <string name="msgErrorData">Seleciona uma data válida!</string>
+    <string name="msgErrorEmailDoador">Preencha o email˜</string>
+    <string name="msgErrorTelefone">Preencha o telefone!</string>
+    <string name="msgDoadorInserido">Doador inserido com sucesso</string>
+    <string name="msgErrorInserirDoador">Erro: não foi possivel inserir um doador</string>
 </resources>

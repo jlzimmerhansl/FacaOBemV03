@@ -2,6 +2,7 @@ package com.example.facaobemv03;
 
 import android.content.Context;
 
+import android.content.CursorLoader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,11 +23,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.loader.content.Loader;
-import androidx.loader.content.CursorLoader;
 
 
 public class ListaDoadoresFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdaptadorDoadores.ClickInterface {
-
     private static final String TAG =  "clicked";
     private AdaptadorDoadores adaptadorDoadores;
     private int id_CursorLoader_Doadores = 0;
@@ -46,6 +45,8 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
         Context context = getContext();
 
         Doador activity = (Doador) getActivity();
+        activity.setFragmentActual(this);
+        activity.setMenuActual(R.menu.menu_lista_doadores);
 
 
         RecyclerView recyclerViewDoadores = (RecyclerView) view.findViewById(R.id.RecycleViewDoadores);
@@ -67,7 +68,15 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
         navController.navigate(R.id.action_ListaDoadoresFragment_to_AdicionaDoadoresFragment);
     }
 
-    public void deletarDoador(){
+    //public void deletarDoador(){
+
+    //}
+
+
+
+    @Override
+    public void recyclerviewOnClick(int position) {
+        Log.d(TAG,"Clicked" + position );
 
     }
 
@@ -83,7 +92,14 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new CursorLoader(getContext(), FacaOBemrContentProvider.ENDERECO_DOADOR, BdTableDoador.TODOS_CAMPOS, null, null, BdTableDoador.CAMPO_NOME_DOADOR);
+        return new androidx.loader.content.CursorLoader(
+                getContext(),
+                FacaOBemrContentProvider.ENDERECO_DOADOR,
+                BdTableDoador.TODOS_CAMPOS,
+                null,
+                null,
+                BdTableDoador.CAMPO_NOME_DOADOR
+        );
     }
 
     /**
@@ -144,12 +160,5 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         adaptadorDoadores.setCursor(null);
-
-    }
-
-    @Override
-    public void recyclerviewOnClick(int position) {
-        Log.d(TAG,"Clicked" + position );
-
     }
 }
