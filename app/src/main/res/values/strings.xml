@@ -22,4 +22,5 @@
     <string name="msgErrorTelefone">Preencha o telefone!</string>
     <string name="msgDoadorInserido">Doador inserido com sucesso</string>
     <string name="msgErrorInserirDoador">Erro: não foi possivel inserir um doador</string>
+    <string name="lblDeleteDoador">Delete Donor</string>
 </resources>
