@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
+import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.database.BdTableDoador;
 
 import androidx.annotation.NonNull;
@@ -25,10 +26,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.loader.content.Loader;
 
 
-public class ListaDoadoresFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdaptadorDoadores.ClickInterface {
+public class ListaDoadoresFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG =  "clicked";
     private AdaptadorDoadores adaptadorDoadores;
     private int id_CursorLoader_Doadores = 0;
+
+   // public DoadorModelo getDoadorSelecionado(){
+   //     return adaptadorDoadores.getDoadorSelecionado();
+   // }
 
     @Override
     public View onCreateView(
@@ -50,7 +55,7 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
 
 
         RecyclerView recyclerViewDoadores = (RecyclerView) view.findViewById(R.id.RecycleViewDoadores);
-        adaptadorDoadores = new AdaptadorDoadores(context, this);
+        adaptadorDoadores = new AdaptadorDoadores(context);
         recyclerViewDoadores.setAdapter(adaptadorDoadores);
         recyclerViewDoadores.setLayoutManager(new LinearLayoutManager(context));
 
@@ -73,12 +78,6 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
     //}
 
 
-
-    @Override
-    public void recyclerviewOnClick(int position) {
-        Log.d(TAG,"Clicked" + position );
-
-    }
 
     /**
      * Instantiate and return a new Loader for the given ID.

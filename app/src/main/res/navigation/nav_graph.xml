@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/ListaDoadoresFragment"
         android:name="com.example.facaobemv03.ListaDoadoresFragment"
-        android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_listadoadores">
 
         <action
@@ -27,7 +26,6 @@
     <fragment
         android:id="@+id/AdicionaDoadoresFragment"
         android:name="com.example.facaobemv03.AdicionaDoadoresFragment"
-        android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_adicionadoadores">
 
         <action

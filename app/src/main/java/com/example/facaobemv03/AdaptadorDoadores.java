@@ -2,6 +2,7 @@ package com.example.facaobemv03;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.example.facaobemv03.Models.DoadorModelo;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.ViewHolderDoadores> {
@@ -21,10 +23,8 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
 
     private Cursor cursor= null;
 
-    private ClickInterface clickInterface;
 
-    public AdaptadorDoadores(Context context, ClickInterface clickInterface) {
-        this.clickInterface = clickInterface;
+    public AdaptadorDoadores(Context context) {
         this.context = context;
     }
 
@@ -59,7 +59,7 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
     @Override
     public ViewHolderDoadores onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemDoador = LayoutInflater.from(context).inflate(R.layout.item_doador, parent, false);
-        return new ViewHolderDoadores(itemDoador, clickInterface);
+        return new ViewHolderDoadores(itemDoador);
     }
 
     /**
@@ -102,18 +102,26 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
         return cursor.getCount();
     }
 
+    //public DoadorModelo getDoadorSelecionado(){
+      //  if(viewHolderDoadoresSelecionado == null) return null;
+
+        //return viewHolderDoadoresSelecionado.doadorModelo;
+    //}
+
+    private ViewHolderDoadores viewHolderDoadoresSelecionado = null;
+
     public class ViewHolderDoadores extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private final TextView TextViewNomeDoador;
         private final TextView TextViewDataDoacao;
         private DoadorModelo doadorModelo = null;
-        ClickInterface clickInterface;
 
-        public ViewHolderDoadores(@NonNull View itemView, ClickInterface clickInterface) {
+        public ViewHolderDoadores(@NonNull View itemView) {
             super(itemView);
 
             TextViewNomeDoador = (TextView) itemView.findViewById(R.id.textViewNomeDoador);
             TextViewDataDoacao = (TextView) itemView.findViewById(R.id.textViewDataDoacao);
-            this.clickInterface = clickInterface;
+
             itemView.setOnClickListener(this);
         }
 
@@ -125,15 +133,32 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
 
         }
 
+
         @Override
         public void onClick(View view) {
-            clickInterface.recyclerviewOnClick(getAdapterPosition());
+            if(viewHolderDoadoresSelecionado == this){
+                return;
+            }
+
+            if(viewHolderDoadoresSelecionado != null){
+                viewHolderDoadoresSelecionado.tirarSelecao();
+            }
+
+            viewHolderDoadoresSelecionado = this;
+            selecionaItem();
+
+           // Doador activity = (Doador) AdaptadorDoadores.this.context;
+            //activity.atualizaOpcoesMenuListaLivros();
+        }
+
+        private void selecionaItem() {
+            itemView.setBackgroundResource(R.color.secondaryColor);
+        }
+
+        private void tirarSelecao(){
+            itemView.setBackgroundResource(R.color.primaryTextColor);
         }
     }
 
-    public interface ClickInterface {
-
-        public void recyclerviewOnClick(int position);
-    }
 
 }
