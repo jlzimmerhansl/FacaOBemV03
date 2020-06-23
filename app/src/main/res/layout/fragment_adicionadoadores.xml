@@ -98,6 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/inputEmailDoador"
+            android:drawableLeft="@drawable/ic_baseline_email_24"
+            android:paddingLeft="16dp"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,6 +117,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/inputTelefoneDoador"
+            android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+            android:paddingLeft="16dp"
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
