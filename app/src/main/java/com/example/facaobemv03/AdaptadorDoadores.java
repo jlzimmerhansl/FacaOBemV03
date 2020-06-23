@@ -152,7 +152,7 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
         }
 
         private void selecionaItem() {
-            itemView.setBackgroundResource(R.color.secondaryColor);
+            itemView.setBackgroundResource(R.color.Gray);
         }
 
         private void tirarSelecao(){
