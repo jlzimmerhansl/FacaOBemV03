@@ -15,7 +15,7 @@ import com.example.facaobemv03.Models.DoadorModelo;
 public class Doador extends AppCompatActivity {
     private Fragment fragmentActual = null;
     private int menuActual = R.menu.menu_lista_doadores;
-   // private Menu menu;
+    private Menu menu;
    // private DoadorModelo doadorModelo = null;
 
    // public DoadorModelo getDoadorModelo(){
@@ -43,7 +43,7 @@ public class Doador extends AppCompatActivity {
 
     }
 
-    /*public void atualizaOpcoesMenuListaLivros(){
+    public void atualizaOpcoesMenuListaDoadores(){
         ListaDoadoresFragment listaDoadoresFragment = (ListaDoadoresFragment) fragmentActual;
 
         DoadorModelo doadorModelo = listaDoadoresFragment.getDoadorSelecionado();
@@ -51,15 +51,15 @@ public class Doador extends AppCompatActivity {
         boolean mostraMenuEditarEliminar = (doadorModelo != null);
 
         menu.findItem(R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment).setVisible(mostraMenuEditarEliminar);
-        menu.findItem(R.id.action_ListaDoadoresFragment_to_eliminaDoadoresFragment).setVisible(mostraMenuEditarEliminar);
-    }*/
+        menu.findItem(R.id.action_deletar_doador).setVisible(mostraMenuEditarEliminar);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(menuActual, menu);
 
-       // this.menu = menu;
+       this.menu = menu;
 
         return true;
     }
@@ -85,7 +85,7 @@ public class Doador extends AppCompatActivity {
     }
 
     private boolean processaOpcoesMenuDeletarDoadores(int id) {
-        return true;
+        return false;
     }
 
     private boolean processaOpcoesMenuAlterarDoadores(int id) {

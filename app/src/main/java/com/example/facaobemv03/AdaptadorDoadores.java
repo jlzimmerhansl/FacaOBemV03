@@ -147,8 +147,8 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
             viewHolderDoadoresSelecionado = this;
             selecionaItem();
 
-           // Doador activity = (Doador) AdaptadorDoadores.this.context;
-            //activity.atualizaOpcoesMenuListaLivros();
+            Doador activity = (Doador) AdaptadorDoadores.this.context;
+            activity.atualizaOpcoesMenuListaDoadores();
         }
 
         private void selecionaItem() {
