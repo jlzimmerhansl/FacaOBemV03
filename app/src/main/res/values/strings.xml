@@ -23,4 +23,9 @@
     <string name="msgDoadorInserido">Doador inserido com sucesso</string>
     <string name="msgErrorInserirDoador">Erro: não foi possivel inserir um doador</string>
     <string name="lblDeleteDoador">Delete Donor</string>
+    <string name="lblAlteraDoador">Change Donor</string>
+    <string name="txtNomeDoadorAlterar">Donor name</string>
+    <string name="inputNomeDoadorAltera">Donor Name</string>
+    <string name="inputEmailDoadorAltera">Donor\' s Email</string>
+    <string name="inputTelefoneDoadorAltera">Donor\'s phone</string>
 </resources>

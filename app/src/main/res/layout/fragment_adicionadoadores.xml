@@ -55,21 +55,22 @@
 
     <Button
         android:id="@+id/btnSelecionaData"
-        android:layout_width="154dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="25dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/btnSelecionaData"
+        android:drawableLeft="@drawable/ic_baseline_date_range_24"
+        android:paddingLeft="16dp"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblNomeDoador" />
 
     <TextView
         android:id="@+id/lblDataSelecionada"
-        android:layout_width="177dp"
-        android:layout_height="33dp"
+        android:layout_width="260dp"
+        android:layout_height="29dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
@@ -79,6 +80,7 @@
         android:text="@string/inputDataSelecionada"
         app:layout_constraintBottom_toTopOf="@+id/lblEmailDoador"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnSelecionaData"
         app:layout_constraintTop_toBottomOf="@+id/lblNomeDoador" />
 
