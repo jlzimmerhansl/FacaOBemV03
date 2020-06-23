@@ -49,7 +49,8 @@
             android:id="@+id/inputNomeDoadorAltera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/inputNomeDoadorAltera" />
+            android:hint="@string/inputNomeDoadorAltera"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -94,8 +95,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_baseline_email_24"
-            android:paddingLeft="16dp"
-            android:hint="@string/inputEmailDoadorAltera" />
+            android:hint="@string/inputEmailDoadorAltera"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -114,8 +116,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_baseline_local_phone_24"
-            android:paddingLeft="16dp"
-            android:hint="hint" />
+            android:hint="hint"
+            android:inputType="phone"
+            android:paddingLeft="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -26,4 +26,6 @@
     <string name="inputNomeDoadorAltera">Nome Doador</string>
     <string name="inputEmailDoadorAltera">Email do Doador:</string>
     <string name="inputTelefoneDoadorAltera">Telefone do Doador:</string>
+    <string name="msgUpdateDoadorSucess">Livro guardado com sucesso</string>
+    <string name="msgErrorUpdateDoador">Erro: Não foi possível alterar o livro</string>
 </resources>

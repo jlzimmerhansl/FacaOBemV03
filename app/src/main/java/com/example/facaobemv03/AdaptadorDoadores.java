@@ -102,11 +102,11 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
         return cursor.getCount();
     }
 
-    public DoadorModelo getDoadorSelecionado(){
-      if(viewHolderDoadoresSelecionado == null) return null;
+    //public DoadorModelo getDoadorSelecionado(){
+      //if(viewHolderDoadoresSelecionado == null) return null;
 
-        return viewHolderDoadoresSelecionado.doadorModelo;
-    }
+        //return viewHolderDoadoresSelecionado.doadorModelo;
+    //}
 
     private ViewHolderDoadores viewHolderDoadoresSelecionado = null;
 
@@ -148,7 +148,7 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
             selecionaItem();
 
             Doador activity = (Doador) AdaptadorDoadores.this.context;
-            activity.atualizaOpcoesMenuListaDoadores();
+            activity.doadorAlterado(doadorModelo);
         }
 
         private void selecionaItem() {

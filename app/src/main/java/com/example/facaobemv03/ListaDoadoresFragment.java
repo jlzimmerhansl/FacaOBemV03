@@ -31,9 +31,6 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
     private AdaptadorDoadores adaptadorDoadores;
     private int id_CursorLoader_Doadores = 0;
 
-   public DoadorModelo getDoadorSelecionado(){
-        return adaptadorDoadores.getDoadorSelecionado();
-   }
 
     @Override
     public View onCreateView(

@@ -16,11 +16,11 @@ public class Doador extends AppCompatActivity {
     private Fragment fragmentActual = null;
     private int menuActual = R.menu.menu_lista_doadores;
     private Menu menu;
-   // private DoadorModelo doadorModelo = null;
+   private DoadorModelo doadorModelo = null;
 
-   // public DoadorModelo getDoadorModelo(){
-    //    return doadorModelo;
-    //}
+   public DoadorModelo getDoadorModelo(){
+       return doadorModelo;
+   }
 
     public void setFragmentActual(Fragment fragmentActual){
         this.fragmentActual = fragmentActual;
@@ -43,11 +43,12 @@ public class Doador extends AppCompatActivity {
 
     }
 
-    public void atualizaOpcoesMenuListaDoadores(){
-        ListaDoadoresFragment listaDoadoresFragment = (ListaDoadoresFragment) fragmentActual;
+    public void doadorAlterado(DoadorModelo doadorModelo){
+        //ListaDoadoresFragment listaDoadoresFragment = (ListaDoadoresFragment) fragmentActual;
 
-        DoadorModelo doadorModelo = listaDoadoresFragment.getDoadorSelecionado();
+        //DoadorModelo doadorModelo = listaDoadoresFragment.getDoadorSelecionado();
 
+        this.doadorModelo = doadorModelo;
         boolean mostraMenuEditarEliminar = (doadorModelo != null);
 
         menu.findItem(R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment).setVisible(mostraMenuEditarEliminar);
@@ -90,6 +91,14 @@ public class Doador extends AppCompatActivity {
 
     private boolean processaOpcoesMenuAlterarDoadores(int id) {
         alteraDoadoresFragment alteraDoadoresFragment = (alteraDoadoresFragment) fragmentActual;
+        if(id == R.id.action_guardarAlterarDoador){
+            alteraDoadoresFragment.cadastrarAlteraDoador();
+            return true;
+        }
+        else if(id == R.id.action_cancelarDoadorAlterar){
+            alteraDoadoresFragment.cancelar();
+            return true;
+        }
 
 
         return false;
