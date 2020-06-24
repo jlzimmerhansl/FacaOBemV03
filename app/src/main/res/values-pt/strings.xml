@@ -30,4 +30,6 @@
     <string name="msgErrorUpdateDoador">Erro: Não foi possível alterar o livro</string>
     <string name="msgSucessEliminarDoador">Livro eliminado com sucesso</string>
     <string name="msgErrorEliminarDoador">Erro: não foi possivel eliminar o doador</string>
+    <string name="lblDetalheDoador">Detalhe Doador</string>
+    <string name="btnCadastrarProduto">Cadastrar Produto</string>
 </resources>
