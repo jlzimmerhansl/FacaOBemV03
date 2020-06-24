@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.facaobemv03.Converte;
 import com.example.facaobemv03.Models.DoadorModelo;
+import com.example.facaobemv03.Models.ProdutoDetalheModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
 
 import androidx.annotation.Nullable;
@@ -40,28 +41,28 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         BdTableDoador tableDoador = new BdTableDoador(db);
 
         DoadorModelo doadorModelo = new DoadorModelo();
-        doadorModelo.setNomeDoador("Juliana");
+        doadorModelo.setNomeDoador("Juliana Satos da Silva");
         doadorModelo.setDataDoacao("22/05/2020");
         doadorModelo.setEmailDoador("contato@teste.com.br");
         doadorModelo.setTelefoneDoador("987543756");
         long idDoador = tableDoador.insert(Converte.doadorToContentValue(doadorModelo));
 
         doadorModelo = new DoadorModelo();
-        doadorModelo.setNomeDoador("Sonia");
+        doadorModelo.setNomeDoador("Sonia Rodrigues Santos");
         doadorModelo.setDataDoacao("10/05/2020");
         doadorModelo.setEmailDoador("contato2@teste.com.br");
         doadorModelo.setTelefoneDoador("09874366");
         long idDoador2 = tableDoador.insert(Converte.doadorToContentValue(doadorModelo));
 
         doadorModelo = new DoadorModelo();
-        doadorModelo.setNomeDoador("Priscila");
+        doadorModelo.setNomeDoador("Priscila do Nascimento Carvalho");
         doadorModelo.setDataDoacao("13/05/2020");
         doadorModelo.setEmailDoador("contato3@teste.com.br");
         doadorModelo.setTelefoneDoador("987543444");
         long idDoador3 = tableDoador.insert(Converte.doadorToContentValue(doadorModelo));
 
         doadorModelo = new DoadorModelo();
-        doadorModelo.setNomeDoador("Ana");
+        doadorModelo.setNomeDoador("Janos Moreira Silva");
         doadorModelo.setDataDoacao("10/05/2020");
         doadorModelo.setEmailDoador("contato2@teste.com.br");
         doadorModelo.setTelefoneDoador("343543756");
@@ -73,25 +74,51 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         produtoModelo.setNomeProduto("Luva");
         produtoModelo.setQuantidade(90);
         produtoModelo.setIdDoador(idDoador);
-        tableDoador.insert(Converte.produtoToContentValues(produtoModelo));
+        long idProduto1 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Alcool");
         produtoModelo.setQuantidade(80);
         produtoModelo.setIdDoador(idDoador2);
-        tableDoador.insert(Converte.produtoToContentValues(produtoModelo));
+        long idProduto2 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Mascara");
         produtoModelo.setQuantidade(200);
         produtoModelo.setIdDoador(idDoador3);
-        tableDoador.insert(Converte.produtoToContentValues(produtoModelo));
+        long idProduto3 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Shield");
         produtoModelo.setQuantidade(150);
         produtoModelo.setIdDoador(idDoador4);
-        tableDoador.insert(Converte.produtoToContentValues(produtoModelo));
+        long idProduto4 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+
+        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(db);
+
+        ProdutoDetalheModelo produtoDetalheModelo = new ProdutoDetalheModelo();
+        produtoDetalheModelo.setMarcaProduto("Clean Line");
+        produtoDetalheModelo.setDescricao("Melhor marca para eses produtos, direcionar aos hospitais");
+        produtoDetalheModelo.setIdProduto(idProduto1);
+        tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
+
+        produtoDetalheModelo = new ProdutoDetalheModelo();
+        produtoDetalheModelo.setMarcaProduto("Gray Line");
+        produtoDetalheModelo.setDescricao("Direcionar para as pessoas com necessidade");
+        produtoDetalheModelo.setIdProduto(idProduto2);
+        tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
+
+        produtoDetalheModelo = new ProdutoDetalheModelo();
+        produtoDetalheModelo.setMarcaProduto("Center Care");
+        produtoDetalheModelo.setDescricao("Guardar no estoque");
+        produtoDetalheModelo.setIdProduto(idProduto4);
+        tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
+
+        produtoDetalheModelo = new ProdutoDetalheModelo();
+        produtoDetalheModelo.setMarcaProduto("Centro do Amor");
+        produtoDetalheModelo.setDescricao("Guardar no setor D do estoque");
+        produtoDetalheModelo.setIdProduto(idProduto4);
+        tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
     }
 
     @Override
