@@ -44,15 +44,13 @@ public class Doador extends AppCompatActivity {
     }
 
     public void doadorAlterado(DoadorModelo doadorModelo){
-        //ListaDoadoresFragment listaDoadoresFragment = (ListaDoadoresFragment) fragmentActual;
-
-        //DoadorModelo doadorModelo = listaDoadoresFragment.getDoadorSelecionado();
 
         this.doadorModelo = doadorModelo;
         boolean mostraMenuEditarEliminar = (doadorModelo != null);
 
         menu.findItem(R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment).setVisible(mostraMenuEditarEliminar);
         menu.findItem(R.id.action_deletar_doador).setVisible(mostraMenuEditarEliminar);
+        menu.findItem(R.id.action_ListaDoadores_to_DetalheDoador).setVisible(mostraMenuEditarEliminar);
     }
 
     @Override
@@ -136,6 +134,10 @@ public class Doador extends AppCompatActivity {
         }
         else if(id == R.id.action_deletar_doador){
             listaDoadoresFragment.deletarDoador();
+            return true;
+        }
+        else if(id == R.id.action_ListaDoadores_to_DetalheDoador){
+            listaDoadoresFragment.mostraDetalheDoador();
             return true;
         }
         return false;

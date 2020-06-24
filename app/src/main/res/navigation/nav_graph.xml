@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_ListaDoadoresFragment_to_LIstaProdutosFragment"
             app:destination="@id/LIstaProdutosFragment" />
+        <action
+            android:id="@+id/action_ListaDoadoresFragment_to_detalheDoadorFragment"
+            app:destination="@id/detalheDoadorFragment" />
     </fragment>
     <fragment
         android:id="@+id/AdicionaDoadoresFragment"
@@ -91,5 +94,14 @@
         <action
             android:id="@+id/action_eliminaProdutoFragment_to_LIstaProdutosFragment"
             app:destination="@id/LIstaProdutosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalheDoadorFragment"
+        android:name="com.example.facaobemv03.DetalheDoadorFragment"
+        android:label="fragment_detalhe_doador"
+        tools:layout="@layout/fragment_detalhe_doador" >
+        <action
+            android:id="@+id/action_detalheDoadorFragment_to_ListaDoadoresFragment"
+            app:destination="@id/ListaDoadoresFragment" />
     </fragment>
 </navigation>
