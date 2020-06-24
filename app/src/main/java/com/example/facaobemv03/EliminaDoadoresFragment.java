@@ -1,58 +1,40 @@
 package com.example.facaobemv03;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.service.autofill.TextValueSanitizer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.facaobemv03.Models.DoadorModelo;
+import com.google.android.material.snackbar.Snackbar;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EliminaDoadoresFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EliminaDoadoresFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private TextView textViewNomeDoador;
+    private TextView textViewDataDoacao;
+    private TextView textViewEmailDoador;
+    private TextView textViewTelefoneDoador;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private DoadorModelo doadorModelo;
 
-    public EliminaDoadoresFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EliminaDoadoresFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EliminaDoadoresFragment newInstance(String param1, String param2) {
-        EliminaDoadoresFragment fragment = new EliminaDoadoresFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -61,4 +43,88 @@ public class EliminaDoadoresFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_elimina_doadores, container, false);
     }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        Context context = getContext();
+
+        Doador activity = (Doador) getActivity();
+        activity.setFragmentActual(this);
+        activity.setMenuActual(R.menu.menu_deletardoador);
+
+        textViewNomeDoador = (TextView) view.findViewById(R.id.lblNomeDoador);
+        textViewDataDoacao = (TextView) view.findViewById(R.id.lblDataDoacao);
+        textViewEmailDoador = (TextView) view.findViewById(R.id.lblEmailDoador);
+        textViewTelefoneDoador = (TextView) view.findViewById(R.id.lblTelefoneDoador);
+
+        Button btnDelete = (Button) view.findViewById(R.id.btnConfirmarEliminar);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteDoador();
+            }
+        });
+
+        Button btnCancelarDelete = (Button) view.findViewById(R.id.btn_cancelarDeletarDoador);
+        btnCancelarDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelarDeletarDoador();
+            }
+        });
+
+        doadorModelo = activity.getDoadorModelo();
+        textViewNomeDoador.setText(doadorModelo.getNomeDoador());
+        textViewDataDoacao.setText(doadorModelo.getDataDoacao());
+        textViewEmailDoador.setText(doadorModelo.getEmailDoador());
+        textViewTelefoneDoador.setText(doadorModelo.getTelefoneDoador());
+    }
+
+    public void deleteDoador() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle("Eliminar Livro");
+        builder.setMessage("Tem certeza que deseja eliminar o doador '" + doadorModelo.getNomeDoador() + "'");
+        builder.setIcon(R.drawable.ic_baseline_delete_24);
+        builder.setPositiveButton("Sim, deletar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                confimarDelecaoDoador();
+            }
+        });
+
+        builder.setNegativeButton("Não, cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                cancelarDeletarDoador();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void confimarDelecaoDoador() {
+        try {
+            Uri enderecoDoadores = Uri.withAppendedPath(FacaOBemrContentProvider.ENDERECO_DOADOR, String.valueOf(doadorModelo.getId()));
+
+            int apagados = getActivity().getContentResolver().delete(enderecoDoadores, null, null);
+
+            if(apagados == 1){
+                Toast.makeText(getContext(), R.string.msgSucessEliminarDoador, Toast.LENGTH_SHORT).show();
+                NavController navController = NavHostFragment.findNavController(EliminaDoadoresFragment.this);
+                navController.navigate(R.id.action_eliminaDoadoresFragment_to_ListaDoadoresFragment);
+                return;
+            }
+
+        } catch (Exception e) {
+            Snackbar.make(textViewNomeDoador, R.string.msgErrorEliminarDoador, Snackbar.LENGTH_INDEFINITE).show();
+        }
+    }
+
+    public void cancelarDeletarDoador() {
+        NavController navController = NavHostFragment.findNavController(EliminaDoadoresFragment.this);
+        navController.navigate(R.id.action_eliminaDoadoresFragment_to_ListaDoadoresFragment);
+    }
+
 }

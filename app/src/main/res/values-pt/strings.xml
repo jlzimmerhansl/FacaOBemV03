@@ -28,4 +28,6 @@
     <string name="inputTelefoneDoadorAltera">Telefone do Doador:</string>
     <string name="msgUpdateDoadorSucess">Livro guardado com sucesso</string>
     <string name="msgErrorUpdateDoador">Erro: Não foi possível alterar o livro</string>
+    <string name="msgSucessEliminarDoador">Livro eliminado com sucesso</string>
+    <string name="msgErrorEliminarDoador">Erro: não foi possivel eliminar o doador</string>
 </resources>

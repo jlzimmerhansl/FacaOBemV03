@@ -86,7 +86,14 @@ public class Doador extends AppCompatActivity {
     }
 
     private boolean processaOpcoesMenuDeletarDoadores(int id) {
-        return false;
+       EliminaDoadoresFragment eliminaDoadoresFragment = (EliminaDoadoresFragment) fragmentActual;
+
+       if(id == R.id.action_eliminaDoadoresFragment_to_ListaDoadoresFragment){
+           eliminaDoadoresFragment.cancelarDeletarDoador();
+           return true;
+       }
+
+       return false;
     }
 
     private boolean processaOpcoesMenuAlterarDoadores(int id) {
@@ -127,7 +134,8 @@ public class Doador extends AppCompatActivity {
             listaDoadoresFragment.alteraDoador();
             return true;
         }
-        else if(id == R.id.action_ListaDoadoresFragment_to_eliminaDoadoresFragment){
+        else if(id == R.id.action_deletar_doador){
+            listaDoadoresFragment.deletarDoador();
             return true;
         }
         return false;

@@ -70,9 +70,10 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
         navController.navigate(R.id.action_ListaDoadoresFragment_to_AdicionaDoadoresFragment);
     }
 
-    //public void deletarDoador(){
-
-    //}
+    public void deletarDoador(){
+        NavController navController = NavHostFragment.findNavController(ListaDoadoresFragment.this);
+        navController.navigate(R.id.action_ListaDoadoresFragment_to_eliminaDoadoresFragment);
+    }
 
 
 
