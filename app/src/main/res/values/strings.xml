@@ -36,4 +36,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lblDetalheDoador">Donor\'s Details</string>
     <string name="btnCadastrarProduto">Add Product</string>
+    <string name="lblCadastrarProduto">Add Product</string>
 </resources>
