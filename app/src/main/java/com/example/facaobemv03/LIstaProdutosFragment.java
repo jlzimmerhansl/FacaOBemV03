@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,6 +70,23 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
         lblNomeDoador.setText(doadorModelo.getNomeDoador());
     }
 
+    public void CadastrarProduto(){
+        NavController navController = NavHostFragment.findNavController(LIstaProdutosFragment.this);
+        navController.navigate(R.id.action_LIstaProdutosFragment_to_inserirProdutosFragment);
+
+    }
+
+    public void AlterarProduto(){
+        NavController navController = NavHostFragment.findNavController(LIstaProdutosFragment.this);
+        navController.navigate(R.id.action_LIstaProdutosFragment_to_alterarProdutoFragment);
+
+    }
+
+    public void deletarProduto(){
+        NavController navController = NavHostFragment.findNavController(LIstaProdutosFragment.this);
+        navController.navigate(R.id.action_LIstaProdutosFragment_to_eliminaProdutoFragment);
+
+    }
 
     @NonNull
     @Override

@@ -56,7 +56,7 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
         editTextNomeProduto = (EditText) view.findViewById(R.id.inputNomeProduto);
         editTextQuantidade = (EditText) view.findViewById(R.id.inputQuantidade);
 
-        llblNomeDoador.setText(String.valueOf(doadorModelo.getId()));
+        llblNomeDoador.setText(doadorModelo.getNomeDoador());
     }
 
     public void cancelarCadastroProduto(){
