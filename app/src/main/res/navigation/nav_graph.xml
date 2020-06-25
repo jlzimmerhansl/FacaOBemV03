@@ -106,5 +106,8 @@
         <action
             android:id="@+id/action_detalheDoadorFragment_to_inserirProdutosFragment"
             app:destination="@id/inserirProdutosFragment" />
+        <action
+            android:id="@+id/action_detalheDoadorFragment_to_LIstaProdutosFragment"
+            app:destination="@id/LIstaProdutosFragment" />
     </fragment>
 </navigation>

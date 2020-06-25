@@ -111,7 +111,7 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         produtoDetalheModelo = new ProdutoDetalheModelo();
         produtoDetalheModelo.setMarcaProduto("Center Care");
         produtoDetalheModelo.setDescricao("Guardar no estoque");
-        produtoDetalheModelo.setIdProduto(idProduto4);
+        produtoDetalheModelo.setIdProduto(idProduto3);
         tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
 
         produtoDetalheModelo = new ProdutoDetalheModelo();

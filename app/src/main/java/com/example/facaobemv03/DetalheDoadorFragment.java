@@ -68,11 +68,24 @@ public class DetalheDoadorFragment extends Fragment {
             }
         });
 
+        Button btnVerListaProdutos = (Button) view.findViewById(R.id.btnVerListaProdutos);
+        btnVerListaProdutos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listaProdutos();
+            }
+        });
+
         doadorModelo = activity.getDoadorModelo();
         textViewNomeDoador.setText(doadorModelo.getNomeDoador());
         textViewDataDoacao.setText(doadorModelo.getDataDoacao());
         textViewEmailDoador.setText(doadorModelo.getEmailDoador());
         textViewTelefoneDoador.setText(doadorModelo.getTelefoneDoador());
+    }
+
+    private void listaProdutos() {
+        NavController navController = NavHostFragment.findNavController(DetalheDoadorFragment.this);
+        navController.navigate(R.id.action_detalheDoadorFragment_to_LIstaProdutosFragment);
     }
 
     private void cadastraProduto() {
