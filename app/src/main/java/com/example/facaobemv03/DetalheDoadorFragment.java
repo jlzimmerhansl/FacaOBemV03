@@ -76,6 +76,8 @@ public class DetalheDoadorFragment extends Fragment {
     }
 
     private void cadastraProduto() {
+        NavController navController = NavHostFragment.findNavController(DetalheDoadorFragment.this);
+        navController.navigate(R.id.action_detalheDoadorFragment_to_inserirProdutosFragment);
     }
 
     public void cancelarDeletarDoador() {
