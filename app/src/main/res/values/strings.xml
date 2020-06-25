@@ -36,4 +36,5 @@
     <string name="lblCadastrarProduto">Add Product</string>
     <string name="inputNomeProduto">Name of Product</string>
     <string name="inputQuantidade">Quantity</string>
+    <string name="lblListaProdutos">Produtct\'s List</string>
 </resources>

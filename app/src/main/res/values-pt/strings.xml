@@ -35,4 +35,5 @@
     <string name="lblCadastrarProduto">Cadastrar Produto</string>
     <string name="inputNomeProduto">Nome do Produto</string>
     <string name="inputQuantidade">Quantidade</string>
+    <string name="lblListaProdutos">Lista de Produtos</string>
 </resources>
