@@ -4,7 +4,6 @@
     <string name="title_activity_doador">Doador</string>
     <!-- Strings used for fragments for navigation -->
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="title_menu_ok">OK</string>
     <string name="action_menu_cancelar">Canceled</string>
     <string name="textViewTituloDoadores">Donors</string>
@@ -32,8 +31,6 @@
     <string name="msgErrorUpdateDoador">Erro: Não foi possível alterar o livro</string>
     <string name="msgSucessEliminarDoador">Livro eliminado com sucesso</string>
     <string name="msgErrorEliminarDoador">Erro: não foi possivel eliminar o doador</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lblDetalheDoador">Donor\'s Details</string>
     <string name="btnCadastrarProduto">Add Product</string>
     <string name="lblCadastrarProduto">Add Product</string>
