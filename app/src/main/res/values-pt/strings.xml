@@ -33,4 +33,6 @@
     <string name="lblDetalheDoador">Detalhe Doador</string>
     <string name="btnCadastrarProduto">Cadastrar Produto</string>
     <string name="lblCadastrarProduto">Cadastrar Produto</string>
+    <string name="inputNomeProduto">Nome do Produto</string>
+    <string name="inputQuantidade">Quantidade</string>
 </resources>

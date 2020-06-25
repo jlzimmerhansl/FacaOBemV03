@@ -37,4 +37,6 @@
     <string name="lblDetalheDoador">Donor\'s Details</string>
     <string name="btnCadastrarProduto">Add Product</string>
     <string name="lblCadastrarProduto">Add Product</string>
+    <string name="inputNomeProduto">Name of Product</string>
+    <string name="inputQuantidade">Quantity</string>
 </resources>
