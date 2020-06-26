@@ -80,6 +80,9 @@ public class Doador extends AppCompatActivity {
             if(processaOpcoesMenuDeletarDoadores(id)) return true;
         }
         else if(menuActual == R.menu.menu_lista_produtos){
+            if(processaOpcoesMenuListaProdutos(id)) return true;
+        }
+        else if(menuActual == R.menu.menu_inserir_produto){
             if(processaOpcoesMenuInserirProdutos(id)) return true;
         }
 
@@ -87,6 +90,17 @@ public class Doador extends AppCompatActivity {
     }
 
     private boolean processaOpcoesMenuInserirProdutos(int id) {
+       InserirProdutosFragment inserirProdutosFragment = (InserirProdutosFragment) fragmentActual;
+       if(id == R.id.action_guardar_produto){
+           inserirProdutosFragment.cadastrarProduto();
+       }
+       if(id == R.id.action_cancelar_inserirProduto){
+           inserirProdutosFragment.cadastrarProduto();
+       }
+       return false;
+    }
+
+    private boolean processaOpcoesMenuListaProdutos(int id) {
         LIstaProdutosFragment lIstaProdutosFragment = (LIstaProdutosFragment) fragmentActual;
        if(id == R.id.action_guardar_produto){
             lIstaProdutosFragment.CadastrarProduto();

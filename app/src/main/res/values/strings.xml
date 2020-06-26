@@ -38,4 +38,6 @@
     <string name="inputQuantidade">Quantity</string>
     <string name="lblListaProdutos">Produtct\'s List</string>
     <string name="btnVerListaProdutos">See Products</string>
+    <string name="msgSuccessProduct">Produto inserido com sucesso</string>
+    <string name="msgErrorInserirProduto">Não foi possível inserir um produto</string>
 </resources>
