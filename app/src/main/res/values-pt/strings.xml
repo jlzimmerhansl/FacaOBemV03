@@ -41,4 +41,6 @@
     <string name="msgSuccessProduct">Produto inserido com sucesso</string>
     <string name="msgErrorInserirProduto">Não foi possível inserir um produto</string>
     <string name="btnVerProdutos">Ver Produtos</string>
+    <string name="inputMarcaProduto">Marca do produto:</string>
+    <string name="inputDescription">Descrição:</string>
 </resources>
