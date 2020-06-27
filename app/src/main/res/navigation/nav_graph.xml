@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_ListaDoadoresFragment_to_detalheDoadorFragment"
             app:destination="@id/detalheDoadorFragment" />
+        <action
+            android:id="@+id/action_ListaDoadoresFragment_to_LIstaProdutosFragment2"
+            app:destination="@id/LIstaProdutosFragment" />
     </fragment>
     <fragment
         android:id="@+id/AdicionaDoadoresFragment"

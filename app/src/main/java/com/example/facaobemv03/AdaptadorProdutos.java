@@ -63,6 +63,8 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
     public class ViewHolderProdutos extends RecyclerView.ViewHolder{
         private final TextView textViewNomeProduto;
         private final TextView textViewQuantidade;
+        private final TextView textViewNomeDoador;
+
         private ProdutoModelo produtoModelo = null;
 
 
@@ -71,6 +73,7 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
 
             textViewNomeProduto = (TextView) itemView.findViewById(R.id.textViewNomeProduto);
             textViewQuantidade = (TextView) itemView.findViewById(R.id.textViewQuantidade);
+            textViewNomeDoador = (TextView) itemView.findViewById(R.id.textViewNomeDoadorItem);
         }
 
         public void setProduto(ProdutoModelo produtoModelo){
@@ -78,6 +81,7 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
 
             textViewNomeProduto.setText(produtoModelo.getNomeProduto());
             textViewQuantidade.setText(String.valueOf(produtoModelo.getQuantidade()));
+            textViewNomeDoador.setText(String.valueOf(produtoModelo.getIdDoador()));
         }
     }
 }

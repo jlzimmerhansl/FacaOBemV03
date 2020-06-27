@@ -37,4 +37,8 @@
     <string name="inputQuantidade">Quantidade</string>
     <string name="lblListaProdutos">Lista de Produtos</string>
     <string name="btnVerListaProdutos">Ver produtos</string>
+    <string name="btnVerDoadores">Ver Doadores</string>
+    <string name="msgSuccessProduct">Produto inserido com sucesso</string>
+    <string name="msgErrorInserirProduto">Não foi possível inserir um produto</string>
+    <string name="btnVerProdutos">Ver Produtos</string>
 </resources>

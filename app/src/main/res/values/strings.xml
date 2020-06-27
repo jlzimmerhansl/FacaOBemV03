@@ -40,4 +40,8 @@
     <string name="btnVerListaProdutos">See Products</string>
     <string name="msgSuccessProduct">Produto inserido com sucesso</string>
     <string name="msgErrorInserirProduto">Não foi possível inserir um produto</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btnVerDoadores">See donors</string>
+    <string name="btnVerProdutos">See Products</string>
 </resources>

@@ -25,4 +25,10 @@
         android:title="Ver Detalhes"
         android:visible="false"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_VerProdutos"
+        android:icon="@drawable/ic_baseline_list_alt_24"
+        android:title="Ver Produtos"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -171,6 +171,10 @@ public class Doador extends AppCompatActivity {
             listaDoadoresFragment.mostraDetalheDoador();
             return true;
         }
+        else if(id == R.id.action_VerProdutos){
+            listaDoadoresFragment.mostraListaProdutos();
+            return true;
+        }
         return false;
     }
 }

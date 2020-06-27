@@ -64,7 +64,6 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
         adaptadorProdutos.setCursor(null);
         LoaderManager.getInstance(this).initLoader(id_CursorLoader_Produtos, null,  this);
 
-        lblNomeDoador.setText(doadorModelo.getNomeDoador());
 
     }
 
@@ -89,12 +88,12 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        String select = "(" + BdTableProduto.DOADOR_ID + "=" + doadorModelo.getId()  +  ")";
+        //String select = "(" + BdTableProduto.DOADOR_ID + "=" + doadorModelo.getId()  +  ")";
         return new CursorLoader(
                 getContext(),
                 FacaOBemrContentProvider.ENDERECO_PRODUTO,
                 BdTableProduto.TODOS_CAMPOS,
-                select,
+                null,
                 null,
                 BdTableProduto.NOME_PRODUTO
         );

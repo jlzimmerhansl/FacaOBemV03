@@ -2,7 +2,6 @@ package com.example.facaobemv03;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,7 @@ import android.widget.TextView;
 
 import com.example.facaobemv03.Models.DoadorModelo;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.ViewHolderDoadores> {
@@ -119,7 +115,7 @@ public class AdaptadorDoadores extends RecyclerView.Adapter<AdaptadorDoadores.Vi
         public ViewHolderDoadores(@NonNull View itemView) {
             super(itemView);
 
-            TextViewNomeDoador = (TextView) itemView.findViewById(R.id.textViewNomeDoador);
+            TextViewNomeDoador = (TextView) itemView.findViewById(R.id.textViewNomeDoadorItem);
             TextViewDataDoacao = (TextView) itemView.findViewById(R.id.textViewDataDoacao);
 
             itemView.setOnClickListener(this);

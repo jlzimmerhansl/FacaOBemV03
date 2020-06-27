@@ -33,6 +33,7 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
     private EditText editTextNomeProduto;
     private EditText editTextQuantidade;
 
+
     private DoadorModelo doadorModelo;
     @Override
     public void onCreate(Bundle savedInstanceState) {
