@@ -21,9 +21,7 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
     private final Context context;
     private Cursor cursor = null;
 
-    public AdaptadorProdutos(Context context) {
-        this.context = context;
-    }
+
 
     public void setCursor(Cursor cursor){
         if(cursor != this.cursor){
@@ -31,7 +29,9 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
             notifyDataSetChanged();
         }
     }
-
+    public AdaptadorProdutos(Context context) {
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -74,6 +74,8 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
             textViewNomeProduto = (TextView) itemView.findViewById(R.id.textViewNomeProduto);
             textViewQuantidade = (TextView) itemView.findViewById(R.id.textViewQuantidade);
             textViewNomeDoador = (TextView) itemView.findViewById(R.id.textViewNomeDoadorItem);
+
+
         }
 
         public void setProduto(ProdutoModelo produtoModelo){

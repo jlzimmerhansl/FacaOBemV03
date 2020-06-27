@@ -102,7 +102,7 @@ public class Doador extends AppCompatActivity {
 
     private boolean processaOpcoesMenuListaProdutos(int id) {
         LIstaProdutosFragment lIstaProdutosFragment = (LIstaProdutosFragment) fragmentActual;
-       if(id == R.id.action_guardar_produto){
+       if(id == R.id.action_inserirProduto){
             lIstaProdutosFragment.CadastrarProduto();
        }
        if(id == R.id.action_alterarProduto){

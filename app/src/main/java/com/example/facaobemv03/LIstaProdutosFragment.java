@@ -31,10 +31,6 @@ import com.example.facaobemv03.database.BdTableProduto;
 public class LIstaProdutosFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private AdaptadorProdutos adaptadorProdutos;
     private int id_CursorLoader_Produtos = 0;
-    private DoadorModelo doadorModelo;
-    private ProdutoModelo produtoModelo;
-    private TextView lblNomeDoador;
-
 
 
     @Override
@@ -52,8 +48,6 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
         Doador activity = (Doador) getActivity();
         activity.setFragmentActual(this);
         activity.setMenuActual(R.menu.menu_lista_produtos);
-        doadorModelo = activity.getDoadorModelo();
-        lblNomeDoador = (TextView) view.findViewById(R.id.lblNomeDoador);
 
 
         RecyclerView recyclerViewProdutos = (RecyclerView) view.findViewById(R.id.recycleViewProdutos);
@@ -88,7 +82,7 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        //String select = "(" + BdTableProduto.DOADOR_ID + "=" + doadorModelo.getId()  +  ")";
+       // String select = "(" + BdTableProduto.DOADOR_ID + "=" + doadorModelo.getId()  +  ")";
         return new CursorLoader(
                 getContext(),
                 FacaOBemrContentProvider.ENDERECO_PRODUTO,

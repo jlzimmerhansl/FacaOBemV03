@@ -53,7 +53,7 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
         Context context = getContext();
 
         Doador activity = (Doador) getActivity();
-        doadorModelo = activity.getDoadorModelo();
+        //doadorModelo = activity.getDoadorModelo();
 
         activity.setFragmentActual(this);
         activity.setMenuActual(R.menu.menu_inserir_produto);
@@ -62,7 +62,7 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
         editTextNomeProduto = (EditText) view.findViewById(R.id.inputNomeProduto);
         editTextQuantidade = (EditText) view.findViewById(R.id.inputQuantidade);
 
-        llblNomeDoador.setText(doadorModelo.getNomeDoador());
+       // llblNomeDoador.setText(doadorModelo.getNomeDoador());
     }
 
     public void cancelarCadastroProduto(){
@@ -94,7 +94,7 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
         ProdutoModelo produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto(nomeProduto);
         produtoModelo.setQuantidade(qtdProduto);
-        produtoModelo.setIdDoador(doadorModelo.getId());
+       // produtoModelo.setIdDoador(doadorModelo.getId());
 
         try {
             getActivity().getContentResolver().insert(FacaOBemrContentProvider.ENDERECO_PRODUTO, Converte.produtoToContentValues(produtoModelo));
