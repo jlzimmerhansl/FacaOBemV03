@@ -60,7 +60,8 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
         return cursor.getCount();
     }
 
-    public class ViewHolderProdutos extends RecyclerView.ViewHolder{
+    private ViewHolderProdutos viewHolderProdutosSelecionado = null;
+    public class ViewHolderProdutos extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView textViewNomeProduto;
         private final TextView textViewQuantidade;
         private final TextView textViewNomeDoador;
@@ -74,7 +75,7 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
             textViewNomeProduto = (TextView) itemView.findViewById(R.id.textViewNomeProduto);
             textViewQuantidade = (TextView) itemView.findViewById(R.id.textViewQuantidade);
             textViewNomeDoador = (TextView) itemView.findViewById(R.id.textViewNomeDoadorItem);
-
+            itemView.setOnClickListener(this);
 
         }
 
@@ -84,6 +85,28 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
             textViewNomeProduto.setText(produtoModelo.getNomeProduto());
             textViewQuantidade.setText(String.valueOf(produtoModelo.getQuantidade()));
             textViewNomeDoador.setText(String.valueOf(produtoModelo.getDoador()));
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(viewHolderProdutosSelecionado == this){
+                return;
+            }
+
+            if(viewHolderProdutosSelecionado != null){
+                viewHolderProdutosSelecionado.tirarSeleca();
+            }
+
+            viewHolderProdutosSelecionado = this;
+            seleciona();
+        }
+
+        private void seleciona() {
+            itemView.setBackgroundResource(R.color.Gray);
+        }
+
+        private void tirarSeleca() {
+            itemView.setBackgroundResource(R.color.primaryTextColor);
         }
     }
 }
