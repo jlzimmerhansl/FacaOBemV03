@@ -83,7 +83,7 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
 
             textViewNomeProduto.setText(produtoModelo.getNomeProduto());
             textViewQuantidade.setText(String.valueOf(produtoModelo.getQuantidade()));
-            textViewNomeDoador.setText(String.valueOf(produtoModelo.getIdDoador()));
+            textViewNomeDoador.setText(String.valueOf(produtoModelo.getDoador()));
         }
     }
 }

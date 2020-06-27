@@ -54,7 +54,7 @@ public class Converte {
 
         valores.put(BdTableProduto.NOME_PRODUTO, produtoModelo.getNomeProduto());
         valores.put(BdTableProduto.QUANTIDADE_PRODUTO, produtoModelo.getQuantidade());
-        valores.put(BdTableProduto.DOADOR_ID, produtoModelo.getIdDoador());
+        valores.put(BdTableProduto.CAMPO_ID_DOADOR, produtoModelo.getIdDoador());
 
         return valores;
     }
@@ -65,7 +65,8 @@ public class Converte {
         produtoModelo.setId((valores.getAsLong(BdTableProduto._ID)));
         produtoModelo.setNomeProduto(valores.getAsString(BdTableProduto.NOME_PRODUTO));
         produtoModelo.setQuantidade(valores.getAsLong(BdTableProduto.QUANTIDADE_PRODUTO));
-        produtoModelo.setIdDoador(valores.getAsLong(BdTableProduto.DOADOR_ID));
+        produtoModelo.setIdDoador(valores.getAsLong(BdTableProduto.CAMPO_ID_DOADOR));
+        produtoModelo.setDoador(valores.getAsString(BdTableProduto.DOADOR));
 
         return produtoModelo;
     }
@@ -73,10 +74,12 @@ public class Converte {
     public static ProdutoModelo cursorToProduto(Cursor cursor){
         ProdutoModelo produtoModelo = new ProdutoModelo();
 
-        produtoModelo.setId(cursor.getInt(cursor.getColumnIndex(BdTableProduto._ID)));
+        produtoModelo.setId(cursor.getLong(cursor.getColumnIndex(BdTableProduto._ID)));
         produtoModelo.setNomeProduto((cursor.getString(cursor.getColumnIndex(BdTableProduto.NOME_PRODUTO))));
         produtoModelo.setQuantidade(cursor.getInt(cursor.getColumnIndex(BdTableProduto.QUANTIDADE_PRODUTO)));
-        produtoModelo.setIdDoador(cursor.getInt(cursor.getColumnIndex(BdTableProduto.DOADOR_ID)));
+        produtoModelo.setIdDoador(cursor.getLong(cursor.getColumnIndex(BdTableProduto.CAMPO_ID_DOADOR)));
+        produtoModelo.setDoador(cursor.getString(cursor.getColumnIndex(BdTableProduto.DOADOR)));
+
 
         return produtoModelo;
     }

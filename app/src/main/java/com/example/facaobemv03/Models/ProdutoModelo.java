@@ -6,6 +6,15 @@ public class ProdutoModelo {
     private String nomeProduto;
     private long quantidade;
     private long idDoador = -1;
+    private String doador = null;
+
+    public String getDoador() {
+        return doador;
+    }
+
+    public void setDoador(String doador) {
+        this.doador = doador;
+    }
 
     public long getId() {
         return id;
