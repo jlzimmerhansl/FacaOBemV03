@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
+import com.example.facaobemv03.database.BdTableProduto;
 
 import org.w3c.dom.Text;
 
@@ -43,6 +44,9 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
     public void onBindViewHolder(@NonNull ViewHolderProdutos holder, int position) {
         cursor.moveToPosition(position);
         ProdutoModelo produtoModelo = Converte.cursorToProduto(cursor);
+
+
+
         holder.setProduto(produtoModelo);
     }
 

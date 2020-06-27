@@ -35,10 +35,7 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
     private ProdutoModelo produtoModelo;
     private TextView lblNomeDoador;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +65,7 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
         LoaderManager.getInstance(this).initLoader(id_CursorLoader_Produtos, null,  this);
 
         lblNomeDoador.setText(doadorModelo.getNomeDoador());
+
     }
 
     public void CadastrarProduto(){
@@ -91,11 +89,12 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        String select = "(" + BdTableProduto.DOADOR_ID + "=" + doadorModelo.getId()  +  ")";
         return new CursorLoader(
                 getContext(),
                 FacaOBemrContentProvider.ENDERECO_PRODUTO,
                 BdTableProduto.TODOS_CAMPOS,
-                null,
+                select,
                 null,
                 BdTableProduto.NOME_PRODUTO
         );

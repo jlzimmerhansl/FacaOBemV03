@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
+import com.example.facaobemv03.Converte;
+import com.example.facaobemv03.Models.ProdutoModelo;
+
 public class BdTableProduto implements BaseColumns {
     public SQLiteDatabase db;
     public static final String NOME_TABELA = "produtos";
@@ -30,13 +33,34 @@ public class BdTableProduto implements BaseColumns {
         );
     }
 
+    //query para resgatar produtos referente ao Doador
+
+    public ProdutoModelo getProdutos(long idDoador){
+        Cursor cursor = db.rawQuery(
+                "SELECT " +
+                        TODOS_CAMPOS +
+                        " FROM " +
+                        NOME_TABELA +
+                        " WHERE " +
+                        DOADOR_ID +
+                        "=?", new String[]{String.valueOf(idDoador)}
+                );
+
+        cursor.moveToNext();
+        return Converte.cursorToProduto(cursor);
+    }
+
     public long insert(ContentValues values){
         return db.insert(NOME_TABELA, null, values );
     }
 
     public Cursor query(String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy){
+
+
         return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
     }
+
+
 
     public int update(ContentValues values, String whereClause, String[] whereArgs){
         return db.update(NOME_TABELA, values, whereClause, whereArgs);

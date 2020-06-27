@@ -8,6 +8,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
+import com.example.facaobemv03.Models.ProdutoModelo;
 import com.example.facaobemv03.database.BdFacaOBemOpenHelper;
 import com.example.facaobemv03.database.BdTableDoador;
 import com.example.facaobemv03.database.BdTableProduto;
@@ -26,6 +27,7 @@ public class FacaOBemrContentProvider extends ContentProvider {
     public static final int URI_ID_DOADOR = 101;
     public static final int URI_ID_PRODUTO = 201;
     public static final int URI_PRODUTO = 200;
+    public static final int URI_PRODUTOSelecao = 202;
     public static final int URI_ID_PRODUTODETALHE = 300;
     public static final int URI_PRODUTODETALHE = 301;
 
@@ -37,6 +39,7 @@ public class FacaOBemrContentProvider extends ContentProvider {
     public static final Uri ENDERECO_DOADOR = Uri.withAppendedPath(ENDERECO_BASE, DOADOR);
     public static final Uri ENDERECO_PRODUTO = Uri.withAppendedPath(ENDERECO_BASE, PRODUTO);
     public static final Uri ENDERECO_PRODUTODETALHE = Uri.withAppendedPath(ENDERECO_BASE, PRODUTODETALHE);
+
 
 
     private BdFacaOBemOpenHelper openHelper;
@@ -77,6 +80,8 @@ public class FacaOBemrContentProvider extends ContentProvider {
                 return new BdTableProduto(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
             case URI_ID_PRODUTO:
                 return new BdTableProduto(bd).query(projection, BdTableProduto._ID + "=?", new String[]{id}, null, null, sortOrder);
+            case URI_PRODUTOSelecao:
+                return new BdTableProduto(bd).query(projection, BdTableProduto._ID + "=" + BdTableDoador._ID, new String[]{id}, null, null, sortOrder);
             case URI_PRODUTODETALHE:
                 return new BdTableProdutoDetalhe(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
             case URI_ID_PRODUTODETALHE:

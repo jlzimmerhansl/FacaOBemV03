@@ -41,7 +41,7 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         BdTableDoador tableDoador = new BdTableDoador(db);
 
         DoadorModelo doadorModelo = new DoadorModelo();
-        doadorModelo.setNomeDoador("Juliana Satos da Silva");
+        doadorModelo.setNomeDoador("Juliana Santos da Silva");
         doadorModelo.setDataDoacao("22/05/2020");
         doadorModelo.setEmailDoador("contato@teste.com.br");
         doadorModelo.setTelefoneDoador("987543756");
@@ -62,7 +62,7 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         long idDoador3 = tableDoador.insert(Converte.doadorToContentValue(doadorModelo));
 
         doadorModelo = new DoadorModelo();
-        doadorModelo.setNomeDoador("Janos Moreira Silva");
+        doadorModelo.setNomeDoador("Janos Zimmerhansl");
         doadorModelo.setDataDoacao("10/05/2020");
         doadorModelo.setEmailDoador("contato2@teste.com.br");
         doadorModelo.setTelefoneDoador("343543756");
@@ -75,6 +75,18 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         produtoModelo.setQuantidade(90);
         produtoModelo.setIdDoador(idDoador);
         long idProduto1 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+
+        produtoModelo = new ProdutoModelo();
+        produtoModelo.setNomeProduto("Alimentos não - pereciveis");
+        produtoModelo.setQuantidade(300);
+        produtoModelo.setIdDoador(idDoador);
+        long idProduto6 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+
+        produtoModelo = new ProdutoModelo();
+        produtoModelo.setNomeProduto("teste");
+        produtoModelo.setQuantidade(300);
+        produtoModelo.setIdDoador(idDoador);
+        long idProduto7 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Alcool");
@@ -93,6 +105,12 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         produtoModelo.setQuantidade(150);
         produtoModelo.setIdDoador(idDoador4);
         long idProduto4 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+
+        produtoModelo = new ProdutoModelo();
+        produtoModelo.setNomeProduto("Cesta Basica");
+        produtoModelo.setQuantidade(70);
+        produtoModelo.setIdDoador(idDoador4);
+        long idProduto5 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(db);
 
