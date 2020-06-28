@@ -32,6 +32,9 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
     private AdaptadorProdutos adaptadorProdutos;
     private int id_CursorLoader_Produtos = 0;
 
+    public ProdutoModelo getProdutoSelecionado(){
+        return adaptadorProdutos.getProdutoSelecionado();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,6 +79,12 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
     public void deletarProduto(){
         NavController navController = NavHostFragment.findNavController(LIstaProdutosFragment.this);
         navController.navigate(R.id.action_LIstaProdutosFragment_to_eliminaProdutoFragment);
+
+    }
+
+    public void cancelarListaProdutos(){
+        NavController navController = NavHostFragment.findNavController(LIstaProdutosFragment.this);
+        navController.navigate(R.id.action_LIstaProdutosFragment_to_ListaDoadoresFragment);
 
     }
 

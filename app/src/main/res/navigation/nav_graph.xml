@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_LIstaProdutosFragment_to_eliminaProdutoFragment"
             app:destination="@id/eliminaProdutoFragment" />
+        <action
+            android:id="@+id/action_LIstaProdutosFragment_to_ListaDoadoresFragment"
+            app:destination="@id/ListaDoadoresFragment" />
     </fragment>
     <fragment
         android:id="@+id/inserirProdutosFragment"

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.facaobemv03.Models.DoadorModelo;
+import com.example.facaobemv03.Models.ProdutoModelo;
 
 public class Doador extends AppCompatActivity {
     private Fragment fragmentActual = null;
@@ -51,6 +52,17 @@ public class Doador extends AppCompatActivity {
         menu.findItem(R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment).setVisible(mostraMenuEditarEliminar);
         menu.findItem(R.id.action_deletar_doador).setVisible(mostraMenuEditarEliminar);
         menu.findItem(R.id.action_ListaDoadores_to_DetalheDoador).setVisible(mostraMenuEditarEliminar);
+    }
+
+    public void atualizaOpcoesDeMenuListaProdutos(){
+       LIstaProdutosFragment lIstaProdutosFragment = (LIstaProdutosFragment) fragmentActual;
+
+        ProdutoModelo produtoModelo = lIstaProdutosFragment.getProdutoSelecionado();
+
+        boolean mostraOpcoesMenuEscondidas = (produtoModelo != null);
+
+        menu.findItem(R.id.action_alterarProduto).setVisible(mostraOpcoesMenuEscondidas);
+        menu.findItem(R.id.action_deletarProduto).setVisible(mostraOpcoesMenuEscondidas);
     }
 
     @Override
@@ -94,7 +106,7 @@ public class Doador extends AppCompatActivity {
        if(id == R.id.action_guardar_produto){
            inserirProdutosFragment.cadastrarProduto();
        }
-       if(id == R.id.action_cancelar_inserirProduto){
+       else if(id == R.id.action_cancelar_inserirProduto){
            inserirProdutosFragment.cadastrarProduto();
        }
        return false;
@@ -105,11 +117,14 @@ public class Doador extends AppCompatActivity {
        if(id == R.id.action_inserirProduto){
             lIstaProdutosFragment.CadastrarProduto();
        }
-       if(id == R.id.action_alterarProduto){
+       else if(id == R.id.action_alterarProduto){
            lIstaProdutosFragment.AlterarProduto();
        }
-       if(id == R.id.action_deletarProduto){
+       else if(id == R.id.action_deletarProduto){
            lIstaProdutosFragment.deletarProduto();
+       }
+       else if(id == R.id.action_cancelarListaProdutos){
+           lIstaProdutosFragment.cancelarListaProdutos();
        }
        return false;
     }

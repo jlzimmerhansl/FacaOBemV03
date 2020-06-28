@@ -11,10 +11,17 @@
         android:id="@+id/action_alterarProduto"
         android:icon="@drawable/ic_edit_black_24dp"
         android:title="alterar"
+        android:visible="false"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_deletarProduto"
         android:icon="@drawable/ic_delete_black_24dp"
         android:title="deletar"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_cancelarListaProdutos"
+        android:icon="@drawable/ic_cancel_black_24dp"
+        android:title="action_cancelarListaProdutos"
         app:showAsAction="ifRoom" />
 </menu>

@@ -45,19 +45,20 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
         cursor.moveToPosition(position);
         ProdutoModelo produtoModelo = Converte.cursorToProduto(cursor);
 
-
-
         holder.setProduto(produtoModelo);
     }
-
-
-
 
     @Override
     public int getItemCount() {
         if(cursor == null) return 0;
 
         return cursor.getCount();
+    }
+
+    public ProdutoModelo getProdutoSelecionado(){
+        if(viewHolderProdutosSelecionado == null) return null;
+
+        return viewHolderProdutosSelecionado.produtoModelo;
     }
 
     private ViewHolderProdutos viewHolderProdutosSelecionado = null;
@@ -99,6 +100,9 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
 
             viewHolderProdutosSelecionado = this;
             seleciona();
+
+            Doador activity = (Doador) AdaptadorProdutos.this.context;
+            activity.atualizaOpcoesDeMenuListaProdutos();
         }
 
         private void seleciona() {
