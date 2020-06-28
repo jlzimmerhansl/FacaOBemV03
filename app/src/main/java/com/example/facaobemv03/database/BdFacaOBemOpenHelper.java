@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.facaobemv03.Converte;
+import com.example.facaobemv03.Models.CentroRecebimentoModelo;
 import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.Models.ProdutoDetalheModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
@@ -30,8 +31,8 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         BdTableProduto tableProduto = new BdTableProduto(database);
         tableProduto.cria();
 
-        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(database);
-        tableProdutoDetalhe.cria();
+        BdTableCentrosRecebimento tableCentroRecebimento = new BdTableCentrosRecebimento(database);
+        tableCentroRecebimento.cria();
 
         if(DESENVOLVIMENTO)
             seedData(database);
@@ -126,7 +127,31 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         produtoModelo.setIdDoador(idDoador4);
         tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
+        BdTableCentrosRecebimento tableCentrosRecebimento = new BdTableCentrosRecebimento(db);
 
+        CentroRecebimentoModelo centroRecebimentoModelo = new CentroRecebimentoModelo();
+        centroRecebimentoModelo.setNomeInstituicao("Lar dos idosos");
+        centroRecebimentoModelo.setEndereco("Rua Aveiro soares, 33");
+        centroRecebimentoModelo.setCidade("Guarda");
+        centroRecebimentoModelo.setCep("6300408");
+
+        tableCentrosRecebimento.insert(Converte.centroRecebimentoToContentValues(centroRecebimentoModelo));
+
+        centroRecebimentoModelo = new CentroRecebimentoModelo();
+        centroRecebimentoModelo.setNomeInstituicao("Igreja da Sé");
+        centroRecebimentoModelo.setEndereco("Rua 32 de Janeiro, 33");
+        centroRecebimentoModelo.setCidade("Guarda");
+        centroRecebimentoModelo.setCep("6300408");
+
+        tableCentrosRecebimento.insert(Converte.centroRecebimentoToContentValues(centroRecebimentoModelo));
+
+        centroRecebimentoModelo = new CentroRecebimentoModelo();
+        centroRecebimentoModelo.setNomeInstituicao("Centro da Misericórdia");
+        centroRecebimentoModelo.setEndereco("Rua dos Anjos, 33");
+        centroRecebimentoModelo.setCidade("Lisboa");
+        centroRecebimentoModelo.setCep("6300408");
+
+        tableCentrosRecebimento.insert(Converte.centroRecebimentoToContentValues(centroRecebimentoModelo));
     }
 
     @Override

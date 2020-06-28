@@ -3,9 +3,11 @@ package com.example.facaobemv03;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.example.facaobemv03.Models.CentroRecebimentoModelo;
 import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.Models.ProdutoDetalheModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
+import com.example.facaobemv03.database.BdTableCentrosRecebimento;
 import com.example.facaobemv03.database.BdTableDoador;
 import com.example.facaobemv03.database.BdTableProduto;
 import com.example.facaobemv03.database.BdTableProdutoDetalhe;
@@ -90,38 +92,41 @@ public class Converte {
         return produtoModelo;
     }
 
-    /*
-    public static ContentValues produtoDetalheToContentValues(ProdutoDetalheModelo produtoDetalheModelo){
+
+    public static ContentValues centroRecebimentoToContentValues(CentroRecebimentoModelo centroRecebimentoModelo){
         ContentValues valores = new ContentValues();
 
-        valores.put(BdTableProdutoDetalhe.CAMPO_MARCA, produtoDetalheModelo.getMarcaProduto());
-        valores.put(BdTableProdutoDetalhe.CAMPO_DESCRICAO, produtoDetalheModelo.getDescricao());
-        valores.put(BdTableProdutoDetalhe.CAMPO_ID_PRODUTO, produtoDetalheModelo.getIdProduto());
+        valores.put(BdTableCentrosRecebimento.CAMPO_NOME_CENTRO, centroRecebimentoModelo.getNomeInstituicao());
+        valores.put(BdTableCentrosRecebimento.CAMPO_ENDERECO, centroRecebimentoModelo.getEndereco());
+        valores.put(BdTableCentrosRecebimento.CAMPO_CIDADE, centroRecebimentoModelo.getCidade());
+        valores.put(BdTableCentrosRecebimento.CAMPO_CEP, centroRecebimentoModelo.getCep());
 
         return valores;
 
     }
 
-    public static ProdutoDetalheModelo contentToProdutoDetalhe(ContentValues valores){
-        ProdutoDetalheModelo produtoDetalheModelo = new ProdutoDetalheModelo();
+    public static CentroRecebimentoModelo contentToCentroREcebimento(ContentValues valores){
+        CentroRecebimentoModelo centroRecebimentoModelo = new CentroRecebimentoModelo();
 
-        produtoDetalheModelo.setId(valores.getAsLong(BdTableProdutoDetalhe._ID));
-        produtoDetalheModelo.setMarcaProduto(valores.getAsString(BdTableProdutoDetalhe.CAMPO_MARCA));
-        produtoDetalheModelo.setDescricao(valores.getAsString(BdTableProdutoDetalhe.CAMPO_DESCRICAO));
-        produtoDetalheModelo.setIdProduto(valores.getAsLong(BdTableProdutoDetalhe.CAMPO_ID_PRODUTO));
+        centroRecebimentoModelo.setId(valores.getAsLong(BdTableCentrosRecebimento._ID));
+        centroRecebimentoModelo.setNomeInstituicao(valores.getAsString(BdTableCentrosRecebimento.CAMPO_NOME_CENTRO));
+        centroRecebimentoModelo.setEndereco(valores.getAsString(BdTableCentrosRecebimento.CAMPO_ENDERECO));
+        centroRecebimentoModelo.setCidade(valores.getAsString(BdTableCentrosRecebimento.CAMPO_CIDADE));
+        centroRecebimentoModelo.setCep(valores.getAsString(BdTableCentrosRecebimento.CAMPO_CEP));
 
-        return produtoDetalheModelo;
+        return centroRecebimentoModelo;
     }
 
-    public static ProdutoDetalheModelo cursorToProdutoDetalhe(Cursor cursor){
-        ProdutoDetalheModelo produtoDetalheModelo = new ProdutoDetalheModelo();
+    public static CentroRecebimentoModelo cursorToPCentroRecebimento(Cursor cursor){
+        CentroRecebimentoModelo centroRecebimentoModelo = new CentroRecebimentoModelo();
 
-        produtoDetalheModelo.setId(cursor.getInt(cursor.getColumnIndex(BdTableProdutoDetalhe._ID)));
-        produtoDetalheModelo.setMarcaProduto(cursor.getString(cursor.getColumnIndex(BdTableProdutoDetalhe.CAMPO_MARCA)));
-        produtoDetalheModelo.setDescricao(cursor.getString(cursor.getColumnIndex(BdTableProdutoDetalhe.CAMPO_DESCRICAO)));
-        produtoDetalheModelo.setIdProduto(cursor.getInt(cursor.getColumnIndex(BdTableProdutoDetalhe.CAMPO_ID_PRODUTO)));
+        centroRecebimentoModelo.setId(cursor.getInt(cursor.getColumnIndex(BdTableCentrosRecebimento._ID)));
+        centroRecebimentoModelo.setNomeInstituicao(cursor.getString(cursor.getColumnIndex(BdTableCentrosRecebimento.CAMPO_NOME_CENTRO)));
+        centroRecebimentoModelo.setEndereco(cursor.getString(cursor.getColumnIndex(BdTableCentrosRecebimento.CAMPO_ENDERECO)));
+        centroRecebimentoModelo.setCidade(cursor.getString(cursor.getColumnIndex(BdTableCentrosRecebimento.CAMPO_CIDADE)));
+        centroRecebimentoModelo.setCep(cursor.getString(cursor.getColumnIndex(BdTableCentrosRecebimento.CAMPO_CEP)));
 
-        return produtoDetalheModelo;
+        return centroRecebimentoModelo;
     }
-    */
+
 }

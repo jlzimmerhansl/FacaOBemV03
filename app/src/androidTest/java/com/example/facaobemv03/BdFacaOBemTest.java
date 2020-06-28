@@ -5,10 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.facaobemv03.Models.CentroRecebimentoModelo;
 import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.Models.ProdutoDetalheModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
 import com.example.facaobemv03.database.BdFacaOBemOpenHelper;
+import com.example.facaobemv03.database.BdTableCentrosRecebimento;
 import com.example.facaobemv03.database.BdTableDoador;
 import com.example.facaobemv03.database.BdTableProduto;
 import com.example.facaobemv03.database.BdTableProdutoDetalhe;
@@ -119,6 +121,31 @@ public class BdFacaOBemTest {
 
 
         long id = tableProduto.insert((Converte.produtoToContentValues(produtoModelo)));
+        assertNotEquals(-1, id);
+
+        return id;
+    }
+
+    private long insereCentroRecebimento(SQLiteDatabase bdFacaOBem, String nomeInstituicao, String endereco, String cidade, String cep){
+
+        CentroRecebimentoModelo centroRecebimentoModelo = new CentroRecebimentoModelo();
+
+        centroRecebimentoModelo.setNomeInstituicao(nomeInstituicao);
+        centroRecebimentoModelo.setEndereco(endereco);
+        centroRecebimentoModelo.setCidade(cidade);
+        centroRecebimentoModelo.setCep(cep);
+
+
+        BdTableCentrosRecebimento tableCentrosRecebimento = new BdTableCentrosRecebimento(bdFacaOBem);
+        long id = tableCentrosRecebimento.insert(Converte.centroRecebimentoToContentValues(centroRecebimentoModelo));
+
+        assertNotEquals(-1, id);
+        return id;
+    }
+
+    public long insereCentroRecebimentoModelo(BdTableCentrosRecebimento tableCentrosRecebimento, CentroRecebimentoModelo centroRecebimentoModelo){
+        long id = tableCentrosRecebimento.insert(Converte.centroRecebimentoToContentValues(centroRecebimentoModelo));
+
         assertNotEquals(-1, id);
 
         return id;
@@ -280,6 +307,83 @@ public class BdFacaOBemTest {
         bdFacaOBem.close();
     }
 
+    @Test
+    public void consegueInserirCentroRecebimento(){
+        Context appContext = getTargetContext();
 
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        insereCentroRecebimento(bdFacaOBem, "Lar dos anjos", "Rua dos Anjos, 44", "Lisboa", "6300600");
+        bdFacaOBem.close();
+
+    }
+
+    @Test
+    public void consegueLerCentroRecebimento(){
+        Context appContext = getTargetContext();
+
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+
+        BdTableCentrosRecebimento tableCentrosRecebimento = new BdTableCentrosRecebimento(bdFacaOBem);
+
+        Cursor cursor = tableCentrosRecebimento.query(BdTableCentrosRecebimento.TODOS_CAMPOS, null, null, null, null, null);
+        int registros = cursor.getCount();
+        cursor.close();
+
+        insereCentroRecebimento(bdFacaOBem, "Lar dos anjos", "Rua dos Anjos, 44", "Lisboa", "6300600");
+
+        cursor = tableCentrosRecebimento.query(BdTableCentrosRecebimento.TODOS_CAMPOS, null, null, null, null, null);
+        assertEquals(registros + 1, cursor.getCount());
+        cursor.close();
+        bdFacaOBem.close();
+
+    }
+
+    @Test
+    public void consegueAlterarCentroRecebimento(){
+        Context appContext = getTargetContext();
+
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+        BdTableCentrosRecebimento tableCentrosRecebimento = new BdTableCentrosRecebimento(bdFacaOBem);
+
+        CentroRecebimentoModelo centroRecebimentoModelo = new CentroRecebimentoModelo();
+        centroRecebimentoModelo.setNomeInstituicao("Lar");
+        centroRecebimentoModelo.setEndereco("Rua dos Anjos, 44");
+        centroRecebimentoModelo.setCidade("Lisboa");
+        centroRecebimentoModelo.setCep("6300600");
+
+        long id = insereCentroRecebimentoModelo(tableCentrosRecebimento, centroRecebimentoModelo);
+        assertNotEquals(-1, id);
+
+        centroRecebimentoModelo.setNomeInstituicao("Lar dos Anjos");
+        centroRecebimentoModelo.setEndereco("Rua dos Anjos, 44");
+        centroRecebimentoModelo.setCidade("Lisboa");
+        centroRecebimentoModelo.setCep("6300600");
+        int resgistrosAlterados = tableCentrosRecebimento.update(Converte.centroRecebimentoToContentValues(centroRecebimentoModelo), BdTableCentrosRecebimento._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, resgistrosAlterados);
+        bdFacaOBem.close();
+    }
+
+    @Test
+    public void consegueApagarCentroRecebimento(){
+        Context appContext = getTargetContext();
+
+        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
+        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
+        BdTableCentrosRecebimento tableCentrosRecebimento = new BdTableCentrosRecebimento(bdFacaOBem);
+
+        long id = insereCentroRecebimento(bdFacaOBem, "Lar dos anjos", "Rua dos Anjos, 44", "Lisboa", "6300600");
+        assertNotEquals(-1, id);
+
+        int registrosApagados = tableCentrosRecebimento.delete(BdTableCentrosRecebimento._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, registrosApagados);
+        bdFacaOBem.close();
+
+    }
 
 }
