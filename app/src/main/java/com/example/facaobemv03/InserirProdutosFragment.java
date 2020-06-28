@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
@@ -17,14 +16,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
 import com.example.facaobemv03.database.BdTableDoador;
 import com.google.android.material.snackbar.Snackbar;
@@ -37,7 +33,7 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
     private EditText editTextQuantidade;
     private EditText editTextMarca;
     private EditText editTextDescricao;
-    private Spinner spennerDoadores;
+    private Spinner spinnerDoadores;
     public static final int ID_CURSOR_LOADER_DOADORES = 0;
 
 
@@ -65,7 +61,7 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
 
         editTextNomeProduto = (EditText) view.findViewById(R.id.inputNomeProduto);
         editTextQuantidade = (EditText) view.findViewById(R.id.inputQuantidade);
-        spennerDoadores = (Spinner) view.findViewById(R.id.spinnerDoadores);
+        spinnerDoadores = (Spinner) view.findViewById(R.id.spinnerDoadores);
 
         mostraDadosSpinnerDoadores(null);
 
@@ -96,7 +92,7 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
             return;
         }
 
-        long idDoador = spennerDoadores.getSelectedItemId();
+        long idDoador = spinnerDoadores.getSelectedItemId();
 
         ProdutoModelo produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto(nomeProduto);
@@ -150,6 +146,6 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
                 new int[]{android.R.id.text1}
         );
 
-        spennerDoadores.setAdapter(adapter);
+        spinnerDoadores.setAdapter(adapter);
     }
 }

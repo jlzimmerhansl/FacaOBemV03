@@ -44,4 +44,6 @@
     <string name="inputMarcaProduto">Marca do produto:</string>
     <string name="inputDescription">Descrição:</string>
     <string name="lblAlteraProduto">Alterar Produto</string>
+    <string name="msgSuccessAlterProduct">Produto alterado com sucesso</string>
+    <string name="msgErrorAlterarProduto">Não foi possivel alterar o Produto</string>
 </resources>

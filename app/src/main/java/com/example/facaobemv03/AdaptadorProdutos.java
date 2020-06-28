@@ -55,11 +55,6 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
         return cursor.getCount();
     }
 
-    public ProdutoModelo getProdutoSelecionado(){
-        if(viewHolderProdutosSelecionado == null) return null;
-
-        return viewHolderProdutosSelecionado.produtoModelo;
-    }
 
     private ViewHolderProdutos viewHolderProdutosSelecionado = null;
     public class ViewHolderProdutos extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -102,7 +97,7 @@ public class AdaptadorProdutos extends RecyclerView.Adapter<AdaptadorProdutos.Vi
             seleciona();
 
             Doador activity = (Doador) AdaptadorProdutos.this.context;
-            activity.atualizaOpcoesDeMenuListaProdutos();
+            activity.atualizaOpcoesDeMenuListaProdutos(produtoModelo);
         }
 
         private void seleciona() {

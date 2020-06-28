@@ -32,9 +32,9 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
     private AdaptadorProdutos adaptadorProdutos;
     private int id_CursorLoader_Produtos = 0;
 
-    public ProdutoModelo getProdutoSelecionado(){
+   /* public ProdutoModelo getProdutoSelecionado(){
         return adaptadorProdutos.getProdutoSelecionado();
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -17,10 +17,15 @@ public class Doador extends AppCompatActivity {
     private Fragment fragmentActual = null;
     private int menuActual = R.menu.menu_lista_doadores;
     private Menu menu;
-   private DoadorModelo doadorModelo = null;
+    private DoadorModelo doadorModelo = null;
+    private ProdutoModelo produtoModelo;
 
    public DoadorModelo getDoadorModelo(){
        return doadorModelo;
+   }
+
+   public ProdutoModelo getProdutoModelo(){
+       return produtoModelo;
    }
 
     public void setFragmentActual(Fragment fragmentActual){
@@ -44,6 +49,10 @@ public class Doador extends AppCompatActivity {
 
     }
 
+    public void produtoAlterado(ProdutoModelo produtoModelo){
+       this.produtoModelo = produtoModelo;
+    }
+
     public void doadorAlterado(DoadorModelo doadorModelo){
 
         this.doadorModelo = doadorModelo;
@@ -54,10 +63,8 @@ public class Doador extends AppCompatActivity {
         menu.findItem(R.id.action_ListaDoadores_to_DetalheDoador).setVisible(mostraMenuEditarEliminar);
     }
 
-    public void atualizaOpcoesDeMenuListaProdutos(){
-       LIstaProdutosFragment lIstaProdutosFragment = (LIstaProdutosFragment) fragmentActual;
-
-        ProdutoModelo produtoModelo = lIstaProdutosFragment.getProdutoSelecionado();
+    public void atualizaOpcoesDeMenuListaProdutos(ProdutoModelo produtoModelo){
+       this.produtoModelo = produtoModelo;
 
         boolean mostraOpcoesMenuEscondidas = (produtoModelo != null);
 
@@ -97,8 +104,22 @@ public class Doador extends AppCompatActivity {
         else if(menuActual == R.menu.menu_inserir_produto){
             if(processaOpcoesMenuInserirProdutos(id)) return true;
         }
+        else if(menuActual == R.menu.menu_alterar_produto){
+            if(processaOpcoesMenuAlterarProdutos(id)) return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean processaOpcoesMenuAlterarProdutos(int id) {
+       AlterarProdutoFragment alterarProdutoFragment = (AlterarProdutoFragment) fragmentActual;
+        if(id == R.id.action_guardarAlterarProduto){
+            alterarProdutoFragment.alterarPrduto();
+        }
+        else if(id == R.id.action_cancelar_inserirProduto){
+            alterarProdutoFragment.cancelarAlterarProduto();
+        }
+       return false;
     }
 
     private boolean processaOpcoesMenuInserirProdutos(int id) {
