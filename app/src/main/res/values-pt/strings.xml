@@ -46,4 +46,7 @@
     <string name="lblAlteraProduto">Alterar Produto</string>
     <string name="msgSuccessAlterProduct">Produto alterado com sucesso</string>
     <string name="msgErrorAlterarProduto">Não foi possivel alterar o Produto</string>
+    <string name="lblDeleteProduto">Delete Produto:</string>
+    <string name="btnDeleteProduto">Deletar Produto</string>
+    <string name="btnCancelaDeletar">Cancelar</string>
 </resources>
