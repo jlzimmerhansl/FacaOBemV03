@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_LIstaProdutosFragment_to_ListaDoadoresFragment"
             app:destination="@id/ListaDoadoresFragment" />
+        <action
+            android:id="@+id/action_LIstaProdutosFragment_to_detalheProdutoFragment"
+            app:destination="@id/detalheProdutoFragment" />
     </fragment>
     <fragment
         android:id="@+id/inserirProdutosFragment"
@@ -115,5 +118,26 @@
         <action
             android:id="@+id/action_detalheDoadorFragment_to_LIstaProdutosFragment"
             app:destination="@id/LIstaProdutosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalheProdutoFragment"
+        android:name="com.example.facaobemv03.DetalheProdutoFragment"
+        android:label="fragment_detalhe_produto"
+        tools:layout="@layout/fragment_detalhe_produto" >
+        <action
+            android:id="@+id/action_detalheProdutoFragment_to_LIstaProdutosFragment"
+            app:destination="@id/LIstaProdutosFragment" />
+        <action
+            android:id="@+id/action_detalheProdutoFragment_to_cadastrarDetalheFragment"
+            app:destination="@id/cadastrarDetalheFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cadastrarDetalheFragment"
+        android:name="com.example.facaobemv03.CadastrarDetalheFragment"
+        android:label="fragment_cadastrar_detalhe"
+        tools:layout="@layout/fragment_cadastrar_detalhe" >
+        <action
+            android:id="@+id/action_cadastrarDetalheFragment_to_detalheProdutoFragment"
+            app:destination="@id/detalheProdutoFragment" />
     </fragment>
 </navigation>

@@ -88,6 +88,12 @@ public class LIstaProdutosFragment extends Fragment implements LoaderManager.Loa
 
     }
 
+    public void verDetalheProduto(){
+        NavController navController = NavHostFragment.findNavController(LIstaProdutosFragment.this);
+        navController.navigate(R.id.action_LIstaProdutosFragment_to_detalheProdutoFragment);
+
+    }
+
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {

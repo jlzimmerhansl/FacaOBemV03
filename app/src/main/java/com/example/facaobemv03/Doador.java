@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.facaobemv03.Models.DoadorModelo;
+import com.example.facaobemv03.Models.ProdutoDetalheModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
 
 public class Doador extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class Doador extends AppCompatActivity {
     private Menu menu;
     private DoadorModelo doadorModelo = null;
     private ProdutoModelo produtoModelo;
+    private ProdutoDetalheModelo produtoDetalheModelo = null;
 
    public DoadorModelo getDoadorModelo(){
        return doadorModelo;
@@ -27,6 +29,8 @@ public class Doador extends AppCompatActivity {
    public ProdutoModelo getProdutoModelo(){
        return produtoModelo;
    }
+
+   public ProdutoDetalheModelo getProdutoMOdeloDetalhe(){return produtoDetalheModelo;}
 
     public void setFragmentActual(Fragment fragmentActual){
         this.fragmentActual = fragmentActual;
@@ -70,6 +74,7 @@ public class Doador extends AppCompatActivity {
 
         menu.findItem(R.id.action_alterarProduto).setVisible(mostraOpcoesMenuEscondidas);
         menu.findItem(R.id.action_deletarProduto).setVisible(mostraOpcoesMenuEscondidas);
+        menu.findItem(R.id.action_mostrarDetalhes).setVisible(mostraOpcoesMenuEscondidas);
     }
 
     @Override
@@ -110,8 +115,25 @@ public class Doador extends AppCompatActivity {
         else if(menuActual == R.menu.menu_deletar_produto){
             if(processaOpcoesDeletarProdutos(id)) return true;
         }
+        else if(menuActual == R.menu.menu_detalhe_produto){
+            if(processaOpcoesDetalheProdutos(id)) return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean processaOpcoesDetalheProdutos(int id) {
+       DetalheProdutoFragment detalheProdutoFragment = ( DetalheProdutoFragment) fragmentActual;
+
+       if(id == R.id.action_CadastrarDetalhe){
+           detalheProdutoFragment.cadastraDetalhe();
+           return true;
+       }
+       else if (id == R.id.action_voltarLista){
+           detalheProdutoFragment.cancelarDetalheProduto();
+           return true;
+        }
+       return false;
     }
 
     private boolean processaOpcoesDeletarProdutos(int id) {
@@ -160,6 +182,10 @@ public class Doador extends AppCompatActivity {
        }
        else if(id == R.id.action_cancelarListaProdutos){
            lIstaProdutosFragment.cancelarListaProdutos();
+       }
+       else if(id == R.id.action_mostrarDetalhes){
+           lIstaProdutosFragment.verDetalheProduto();
+           return true;
        }
        return false;
     }

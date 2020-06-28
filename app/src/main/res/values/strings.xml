@@ -54,4 +54,5 @@
     <string name="btnCancelaDeletar">Canceled</string>
     <string name="msgSucessEliminarProduto">Produto deletado com sucesso</string>
     <string name="msgErrorEliminarProduto">Produto deletado com sucesso</string>
+    <string name="lblDetalheProduto">Product\'s Details</string>
 </resources>
