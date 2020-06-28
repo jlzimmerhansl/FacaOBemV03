@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +37,9 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
     private EditText editTextQuantidade;
     private EditText editTextMarca;
     private EditText editTextDescricao;
+    private Spinner spennerDoadores;
     public static final int ID_CURSOR_LOADER_DOADORES = 0;
+
 
     private DoadorModelo doadorModelo;
     @Override
@@ -63,9 +67,14 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
         llblNomeDoador = (TextView) view.findViewById(R.id.lblNomeDoador);
         editTextNomeProduto = (EditText) view.findViewById(R.id.inputNomeProduto);
         editTextQuantidade = (EditText) view.findViewById(R.id.inputQuantidade);
+        spennerDoadores = (Spinner) view.findViewById(R.id.spinnerDoadores);
+
+        mostraDadosSpinnerDoadores(null);
 
        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_DOADORES, null, this);
     }
+
+
 
     public void cancelarCadastroProduto(){
         NavController navController = NavHostFragment.findNavController(InserirProdutosFragment.this);
@@ -130,12 +139,24 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
 
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-
+        mostraDadosSpinnerDoadores(data);
     }
 
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        mostraDadosSpinnerDoadores(null);
+    }
 
+    public void mostraDadosSpinnerDoadores(Cursor data){
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                getContext(),
+                android.R.layout.simple_list_item_1,
+                data,
+                new String[]{BdTableDoador.CAMPO_NOME_DOADOR},
+                new int[]{android.R.id.text1}
+        );
+
+        spennerDoadores.setAdapter(adapter);
     }
 }
