@@ -26,7 +26,7 @@ public class DetalheProdutoFragment extends Fragment {
     private TextView textViewDescricao;
 
     private ProdutoModelo produtoModelo;
-    private ProdutoDetalheModelo produtoDetalheModelo;
+
 
 
     @Override
@@ -58,18 +58,11 @@ public class DetalheProdutoFragment extends Fragment {
 
 
         produtoModelo = activity.getProdutoModelo();
-        produtoDetalheModelo = activity.getProdutoMOdeloDetalhe();
         textViewNomeProduto.setText(produtoModelo.getNomeProduto());
         textViewQUantidade.setText(String.valueOf(produtoModelo.getQuantidade()));
+        textViewMarca.setText(produtoModelo.getMarcaProduto());
+        textViewDescricao.setText(produtoModelo.getDescricao());
 
-        if(textViewMarca != null){
-            textViewMarca.setText(produtoDetalheModelo.getMarcaProduto());
-
-        }
-
-        if(textViewDescricao != null){
-            textViewDescricao.setText(produtoDetalheModelo.getDescricao());
-        }
     }
 
     public void cadastraDetalhe() {

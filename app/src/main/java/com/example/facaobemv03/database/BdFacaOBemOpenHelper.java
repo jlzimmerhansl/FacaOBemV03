@@ -73,70 +73,60 @@ public class BdFacaOBemOpenHelper extends SQLiteOpenHelper {
         ProdutoModelo produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Luva");
         produtoModelo.setQuantidade(90);
+        produtoModelo.setMarcaProduto("Up Clean");
+        produtoModelo.setDescricao("Suprimentos Hospitalares");
         produtoModelo.setIdDoador(idDoador);
-        long idProduto1 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+        tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Alimentos não - pereciveis");
         produtoModelo.setQuantidade(300);
+        produtoModelo.setMarcaProduto("Flower Beautiful");
+        produtoModelo.setDescricao("Estoque imediato");
         produtoModelo.setIdDoador(idDoador);
-        long idProduto6 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+        tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("teste");
         produtoModelo.setQuantidade(300);
+        produtoModelo.setMarcaProduto("Clean Line");
+        produtoModelo.setDescricao("Estoque imediato no galpão 9");
         produtoModelo.setIdDoador(idDoador);
-        long idProduto7 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+        tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Alcool");
         produtoModelo.setQuantidade(80);
+        produtoModelo.setMarcaProduto("Terra Saudavel");
+        produtoModelo.setDescricao("Estoque imediato no galpão 7");
         produtoModelo.setIdDoador(idDoador2);
-        long idProduto2 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+        tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Mascara");
         produtoModelo.setQuantidade(200);
+        produtoModelo.setMarcaProduto("Easy Peace");
+        produtoModelo.setDescricao("Galpão 3");
         produtoModelo.setIdDoador(idDoador3);
-        long idProduto3 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+        tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Shield");
         produtoModelo.setQuantidade(150);
+        produtoModelo.setMarcaProduto("Clean Easy");
+        produtoModelo.setDescricao("Galpão 5");
         produtoModelo.setIdDoador(idDoador4);
-        long idProduto4 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+        tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
         produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto("Cesta Basica");
         produtoModelo.setQuantidade(70);
+        produtoModelo.setMarcaProduto("Clean Line");
+        produtoModelo.setDescricao("Estoque imediato");
         produtoModelo.setIdDoador(idDoador4);
-        long idProduto5 = tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
+        tableProduto.insert(Converte.produtoToContentValues(produtoModelo));
 
-        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(db);
 
-        ProdutoDetalheModelo produtoDetalheModelo = new ProdutoDetalheModelo();
-        produtoDetalheModelo.setMarcaProduto("Clean Line");
-        produtoDetalheModelo.setDescricao("Melhor marca para eses produtos, direcionar aos hospitais");
-        produtoDetalheModelo.setIdProduto(idProduto1);
-        tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
-
-        produtoDetalheModelo = new ProdutoDetalheModelo();
-        produtoDetalheModelo.setMarcaProduto("Gray Line");
-        produtoDetalheModelo.setDescricao("Direcionar para as pessoas com necessidade");
-        produtoDetalheModelo.setIdProduto(idProduto2);
-        tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
-
-        produtoDetalheModelo = new ProdutoDetalheModelo();
-        produtoDetalheModelo.setMarcaProduto("Center Care");
-        produtoDetalheModelo.setDescricao("Guardar no estoque");
-        produtoDetalheModelo.setIdProduto(idProduto3);
-        tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
-
-        produtoDetalheModelo = new ProdutoDetalheModelo();
-        produtoDetalheModelo.setMarcaProduto("Centro do Amor");
-        produtoDetalheModelo.setDescricao("Guardar no setor D do estoque");
-        produtoDetalheModelo.setIdProduto(idProduto4);
-        tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
     }
 
     @Override

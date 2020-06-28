@@ -79,13 +79,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="384dp"
-        android:layout_height="56dp"
+        android:id="@+id/textInputLayout5"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDoadores">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAlterarDoadores">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputMarcaProduto"
@@ -102,11 +102,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
         app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputDescription"
+            android:id="@+id/inputDescricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/inputDescription" />

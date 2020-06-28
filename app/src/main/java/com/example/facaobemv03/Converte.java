@@ -54,6 +54,8 @@ public class Converte {
 
         valores.put(BdTableProduto.NOME_PRODUTO, produtoModelo.getNomeProduto());
         valores.put(BdTableProduto.QUANTIDADE_PRODUTO, produtoModelo.getQuantidade());
+        valores.put(BdTableProduto.CAMPO_MARCA, produtoModelo.getMarcaProduto());
+        valores.put(BdTableProduto.CAMPO_DESCRICAO, produtoModelo.getDescricao());
         valores.put(BdTableProduto.CAMPO_ID_DOADOR, produtoModelo.getIdDoador());
 
         return valores;
@@ -65,6 +67,8 @@ public class Converte {
         produtoModelo.setId((valores.getAsLong(BdTableProduto._ID)));
         produtoModelo.setNomeProduto(valores.getAsString(BdTableProduto.NOME_PRODUTO));
         produtoModelo.setQuantidade(valores.getAsLong(BdTableProduto.QUANTIDADE_PRODUTO));
+        produtoModelo.setMarcaProduto(valores.getAsString(BdTableProduto.CAMPO_MARCA));
+        produtoModelo.setDescricao(valores.getAsString(BdTableProduto.CAMPO_DESCRICAO));
         produtoModelo.setIdDoador(valores.getAsLong(BdTableProduto.CAMPO_ID_DOADOR));
         produtoModelo.setDoador(valores.getAsString(BdTableProduto.DOADOR));
 
@@ -77,6 +81,8 @@ public class Converte {
         produtoModelo.setId(cursor.getLong(cursor.getColumnIndex(BdTableProduto._ID)));
         produtoModelo.setNomeProduto((cursor.getString(cursor.getColumnIndex(BdTableProduto.NOME_PRODUTO))));
         produtoModelo.setQuantidade(cursor.getInt(cursor.getColumnIndex(BdTableProduto.QUANTIDADE_PRODUTO)));
+        produtoModelo.setMarcaProduto((cursor.getString(cursor.getColumnIndex(BdTableProduto.CAMPO_MARCA))));
+        produtoModelo.setDescricao((cursor.getString(cursor.getColumnIndex(BdTableProduto.CAMPO_DESCRICAO))));
         produtoModelo.setIdDoador(cursor.getLong(cursor.getColumnIndex(BdTableProduto.CAMPO_ID_DOADOR)));
         produtoModelo.setDoador(cursor.getString(cursor.getColumnIndex(BdTableProduto.DOADOR)));
 
@@ -84,6 +90,7 @@ public class Converte {
         return produtoModelo;
     }
 
+    /*
     public static ContentValues produtoDetalheToContentValues(ProdutoDetalheModelo produtoDetalheModelo){
         ContentValues valores = new ContentValues();
 
@@ -116,5 +123,5 @@ public class Converte {
 
         return produtoDetalheModelo;
     }
-
+    */
 }

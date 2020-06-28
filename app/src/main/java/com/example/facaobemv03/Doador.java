@@ -125,11 +125,7 @@ public class Doador extends AppCompatActivity {
     private boolean processaOpcoesDetalheProdutos(int id) {
        DetalheProdutoFragment detalheProdutoFragment = ( DetalheProdutoFragment) fragmentActual;
 
-       if(id == R.id.action_CadastrarDetalhe){
-           detalheProdutoFragment.cadastraDetalhe();
-           return true;
-       }
-       else if (id == R.id.action_voltarLista){
+        if (id == R.id.action_voltarLista){
            detalheProdutoFragment.cancelarDetalheProduto();
            return true;
         }
@@ -164,7 +160,7 @@ public class Doador extends AppCompatActivity {
            inserirProdutosFragment.cadastrarProduto();
        }
        else if(id == R.id.action_cancelar_inserirProduto){
-           inserirProdutosFragment.cadastrarProduto();
+           inserirProdutosFragment.cancelarCadastroProduto();
        }
        return false;
     }

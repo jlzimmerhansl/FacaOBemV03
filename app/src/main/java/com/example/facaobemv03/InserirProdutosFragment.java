@@ -61,7 +61,9 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
 
         editTextNomeProduto = (EditText) view.findViewById(R.id.inputNomeProduto);
         editTextQuantidade = (EditText) view.findViewById(R.id.inputQuantidade);
-        spinnerDoadores = (Spinner) view.findViewById(R.id.spinnerDoadores);
+        editTextMarca = (EditText) view.findViewById(R.id.inputMarcaProduto);
+        editTextDescricao = (EditText) view.findViewById(R.id.inputDescricao);
+        spinnerDoadores = (Spinner) view.findViewById(R.id.spinnerAlterarDoadores);
 
         mostraDadosSpinnerDoadores(null);
 
@@ -73,13 +75,13 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
     public void cancelarCadastroProduto(){
         NavController navController = NavHostFragment.findNavController(InserirProdutosFragment.this);
         navController.navigate(R.id.action_inserirProdutosFragment_to_LIstaProdutosFragment);
-        editTextNomeProduto.setText("");
-        editTextQuantidade.setText("");
     }
 
     public void cadastrarProduto(){
         String nomeProduto = editTextNomeProduto.getText().toString();
         long qtdProduto = Long.parseLong(editTextQuantidade.getText().toString());
+        String marcaProduto = editTextMarca.getText().toString();
+        String descricao = editTextDescricao.getText().toString();
 
         if(nomeProduto.length() <= 0){
             editTextNomeProduto.setError(getString(R.string.msgErrorNomeDoador));
@@ -91,12 +93,25 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
             editTextQuantidade.requestFocus();
             return;
         }
+        else if(marcaProduto.length() <= 0){
+            editTextMarca.setError(getString(R.string.msgErrorNomeDoador));
+            editTextMarca.requestFocus();
+            return;
+        }
+        else if(descricao.length() <= 0){
+            editTextDescricao.setError(getString(R.string.msgErrorNomeDoador));
+            editTextDescricao.requestFocus();
+            return;
+        }
 
         long idDoador = spinnerDoadores.getSelectedItemId();
 
         ProdutoModelo produtoModelo = new ProdutoModelo();
+
         produtoModelo.setNomeProduto(nomeProduto);
         produtoModelo.setQuantidade(qtdProduto);
+        produtoModelo.setMarcaProduto(marcaProduto);
+        produtoModelo.setDescricao(descricao);
         produtoModelo.setIdDoador(idDoador);
 
         try {
@@ -107,8 +122,8 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
         } catch (Exception e) {
             Snackbar.make(editTextNomeProduto, R.string.msgErrorInserirProduto, Snackbar.LENGTH_SHORT).show();
         }
-
     }
+
 
 
     @NonNull

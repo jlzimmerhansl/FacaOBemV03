@@ -67,6 +67,8 @@ public class AlterarProdutoFragment extends Fragment implements LoaderManager.Lo
 
         editTextNomeProduto = (EditText) view.findViewById(R.id.inputNomeProduto);
         editTextQuantidade = (EditText) view.findViewById(R.id.inputQuantidade);
+        editTextMarca = (EditText) view.findViewById(R.id.inputMarca);
+        editTextDescricao = (EditText) view.findViewById(R.id.inputDescricao);
         spinnerDoadores = (Spinner) view.findViewById(R.id.spinnerAlterarDoadores);
 
         mostraDadosSpinnerDoadores(null);
@@ -74,6 +76,8 @@ public class AlterarProdutoFragment extends Fragment implements LoaderManager.Lo
         produtoModelo = activity.getProdutoModelo();
         editTextNomeProduto.setText(produtoModelo.getNomeProduto());
         editTextQuantidade.setText(String.valueOf(produtoModelo.getQuantidade()));
+        editTextMarca.setText(produtoModelo.getMarcaProduto());
+        editTextDescricao.setText(produtoModelo.getDescricao());
 
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_DOADORES, null, this);
 
@@ -104,6 +108,8 @@ public class AlterarProdutoFragment extends Fragment implements LoaderManager.Lo
     public void alterarPrduto(){
         String nomeProduto = editTextNomeProduto.getText().toString();
         long qtdProduto = Long.parseLong(editTextQuantidade.getText().toString());
+        String marca = editTextMarca.getText().toString();
+        String descricao = editTextDescricao.getText().toString();
 
         if(nomeProduto.length() <= 0){
             editTextNomeProduto.setError(getString(R.string.msgErrorNomeDoador));
@@ -115,6 +121,16 @@ public class AlterarProdutoFragment extends Fragment implements LoaderManager.Lo
             editTextQuantidade.requestFocus();
             return;
         }
+        else if(marca.length() <= 0){
+            editTextMarca.setError(getString(R.string.msgErrorNomeDoador));
+            editTextMarca.requestFocus();
+            return;
+        }
+        else if(descricao.length() <= 0){
+            editTextDescricao.setError(getString(R.string.msgErrorNomeDoador));
+            editTextDescricao.requestFocus();
+            return;
+        }
 
         long idDoador = spinnerDoadores.getSelectedItemId();
 
@@ -124,6 +140,8 @@ public class AlterarProdutoFragment extends Fragment implements LoaderManager.Lo
 
         produtoModelo.setNomeProduto(nomeProduto);
         produtoModelo.setQuantidade(qtdProduto);
+        produtoModelo.setMarcaProduto(marca);
+        produtoModelo.setDescricao(descricao);
         produtoModelo.setIdDoador(idDoador);
 
         try {

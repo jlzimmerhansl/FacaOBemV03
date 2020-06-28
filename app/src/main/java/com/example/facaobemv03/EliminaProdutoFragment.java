@@ -26,6 +26,8 @@ public class EliminaProdutoFragment extends Fragment {
     private TextView textViewNomeProduto;
     private TextView textViewQuantidade;
     private TextView textViewNomeDoadorItem;
+    private TextView textViewMarce;
+    private TextView textViewDescricao;
 
     private ProdutoModelo produtoModelo;
 
@@ -54,6 +56,8 @@ public class EliminaProdutoFragment extends Fragment {
         textViewNomeProduto = (TextView) view.findViewById(R.id.textViewNomeProduto);
         textViewQuantidade = (TextView) view.findViewById(R.id.textViewQuantidade);
         textViewNomeDoadorItem = (TextView) view.findViewById(R.id.textViewNomeDoadorItem);
+        textViewMarce = (TextView) view.findViewById(R.id.textViewMarcaProduto);
+        textViewDescricao = (TextView) view.findViewById(R.id.textViewDescricao);
 
 
         Button btnDelete = (Button) view.findViewById(R.id.btnDeleteProduto);
@@ -76,6 +80,8 @@ public class EliminaProdutoFragment extends Fragment {
         textViewNomeProduto.setText(produtoModelo.getNomeProduto());
         textViewQuantidade.setText(String.valueOf(produtoModelo.getQuantidade()));
         textViewNomeDoadorItem.setText(produtoModelo.getDoador());
+        textViewMarce.setText(produtoModelo.getMarcaProduto());
+        textViewDescricao.setText(produtoModelo.getDescricao());
     }
 
     public void cancelarDeletarProduto() {

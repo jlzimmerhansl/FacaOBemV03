@@ -8,6 +8,25 @@ public class ProdutoModelo {
     private long idDoador = -1;
     private String doador = null;
 
+    private String marcaProduto;
+    private String Descricao;
+
+    public String getMarcaProduto() {
+        return marcaProduto;
+    }
+
+    public void setMarcaProduto(String marcaProduto) {
+        this.marcaProduto = marcaProduto;
+    }
+
+    public String getDescricao() {
+        return Descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        Descricao = descricao;
+    }
+
     public String getDoador() {
         return doador;
     }

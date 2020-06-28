@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_CadastrarDetalhe"
-        android:icon="@drawable/ic_add_black_24dp"
-        android:title="Cadastrar Detalhe"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_voltarLista"
         android:icon="@drawable/ic_cancel_black_24dp"
         android:title="voltar"

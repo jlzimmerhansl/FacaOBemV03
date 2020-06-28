@@ -90,13 +90,15 @@ public class BdFacaOBemTest {
         return insereDoadorModelo(tableDoador, doadorModelo);
     }
 
-    private long insereProduto(SQLiteDatabase bdFacaOBem, String nomeProduto, long qtdProduto,  String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
+    private long insereProduto(SQLiteDatabase bdFacaOBem, String nomeProduto, long qtdProduto, String marca, String descricao,  String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
         BdTableDoador tableDoador = new BdTableDoador(bdFacaOBem);
         long idDoador = insereDoadorNome(tableDoador, nomeDoador, dataDoacao, emailDoador, telefoneDoador);
 
         ProdutoModelo produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto(nomeProduto);
         produtoModelo.setQuantidade(qtdProduto);
+        produtoModelo.setMarcaProduto(marca);
+        produtoModelo.setDescricao(descricao);
         produtoModelo.setIdDoador(idDoador);
 
         BdTableProduto tableProduto = new BdTableProduto(bdFacaOBem);
@@ -122,24 +124,7 @@ public class BdFacaOBemTest {
         return id;
     }
 
-    private long insereProdutoDetalhe(SQLiteDatabase bdFacaOBem, String marcaProduto, String descricaoProduto, String nomeProduto, long qtdProduto,String nomeDoador, String dataDoacao, String emailDoador, String telefoneDoador){
-        BdTableDoador tableDoador = new BdTableDoador(bdFacaOBem);
-        BdTableProduto tableProduto = new BdTableProduto(bdFacaOBem);
 
-        long idProdutoDetalhe = inserProdutoTabela(tableDoador, tableProduto, nomeProduto, qtdProduto, nomeDoador, dataDoacao, emailDoador, telefoneDoador);
-
-        ProdutoDetalheModelo produtoDetalheModelo = new ProdutoDetalheModelo();
-
-        produtoDetalheModelo.setMarcaProduto(marcaProduto);
-        produtoDetalheModelo.setDescricao(descricaoProduto);
-        produtoDetalheModelo.setIdProduto(idProdutoDetalhe);
-
-        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(bdFacaOBem);
-        long id = tableProdutoDetalhe.insert(Converte.produtoDetalheToContentValues(produtoDetalheModelo));
-        assertNotEquals(-1, id);
-
-        return id;
-    }
 
 
     @Test
@@ -228,7 +213,7 @@ public class BdFacaOBemTest {
         BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
         SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
 
-        insereProduto(bdFacaOBem, "Alcool", 30, "Janos", "30/05/2020", "contato@gmail.com", "925456888");
+        insereProduto(bdFacaOBem, "Alcool", 30, "Line Clean", "Guardar no lote 5", "Janos", "30/05/2020", "contato@gmail.com", "925456888");
         bdFacaOBem.close();
     }
 
@@ -244,7 +229,7 @@ public class BdFacaOBemTest {
         int registros = cursor.getCount();
         cursor.close();
 
-        insereProduto(bdFacaOBem, "Mascara", 40, "Maria", "15/05/2020", "contato@gmail.com", "925456654");
+        insereProduto(bdFacaOBem, "Mascara", 40,"Clean Easy", "Guardar na dispensa", "Maria", "15/05/2020", "contato@gmail.com", "925456654");
 
         cursor = tableProduto.query(BdTableProduto.TODOS_CAMPOS,null, null, null, null, null);
 
@@ -260,7 +245,7 @@ public class BdFacaOBemTest {
         BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
         SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
 
-        long idProduto = insereProduto(bdFacaOBem, "Luva", 150, "João", "09/05/2020", "joao@gmail.com", "975346777");
+        long idProduto = insereProduto(bdFacaOBem, "Luva", 150,"Easy Serie", "Separar para a casa da Miericordia", "João", "09/05/2020", "joao@gmail.com", "975346777");
 
         BdTableProduto tableProduto = new BdTableProduto(bdFacaOBem);
         Cursor cursorProdutos = tableProduto.query(BdTableProduto.TODOS_CAMPOS, BdTableProduto.CAMPO_ID_COMPLETO + "=?", new String[]{String.valueOf(idProduto)}, null, null, null);
@@ -286,7 +271,7 @@ public class BdFacaOBemTest {
         BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
         SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
 
-        long idProduto = insereProduto(bdFacaOBem, "Cesta Básica", 90, "Suzana", "10/05/2020", "suzana@gmail.com", "975346755");
+        long idProduto = insereProduto(bdFacaOBem, "Cesta Básica", 90, "Terra saudável", "Estocar com os não-pereciveis","Suzana", "10/05/2020", "suzana@gmail.com", "975346755");
 
         BdTableProduto tableProduto = new BdTableProduto(bdFacaOBem);
 
@@ -295,76 +280,6 @@ public class BdFacaOBemTest {
         bdFacaOBem.close();
     }
 
-    @Test
-    public void consegueInserirProdutoDetalhe(){
-        Context appContext = getTargetContext();
 
-        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
-        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
 
-        insereProdutoDetalhe(bdFacaOBem, "LightClean", "Recebemos 30 unidades", "Luva", 40, "Fernada", "04/05/2020", "contato@light.com.br", "867594665");
-
-        bdFacaOBem.close();
-    }
-
-    @Test
-    public void consegueLerProdutoDetalhe(){
-        Context appContext = getTargetContext();
-        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
-        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
-
-        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(bdFacaOBem);
-
-        Cursor cursor = tableProdutoDetalhe.query(BdTableProdutoDetalhe.TODOS_CAMPOS, null, null, null, null, null);
-        int registros = cursor.getCount();
-        cursor.close();
-
-        insereProdutoDetalhe(bdFacaOBem, "LightClean", "Recebemos 30 unidades", "Luva", 40, "Fernada", "04/05/2020", "contato@light.com.br", "867594665");
-
-        cursor = tableProdutoDetalhe.query(BdTableProdutoDetalhe.TODOS_CAMPOS, null, null, null, null, null);
-        assertEquals(registros + 1, cursor.getCount());
-        cursor.close();
-
-        bdFacaOBem.close();
-
-    }
-
-    @Test
-    public void consegueAlterarProdutoDetahe(){
-        Context appContext = getTargetContext();
-        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
-        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
-
-        long idProdutoDetalhe = insereProdutoDetalhe(bdFacaOBem, "Cien", "Esse produto deve ser direcionado ao centro de ajuda", "Alcool", 200, "Cintia", "13/06/2020", "contato@cien.com.br", "867599886");
-
-        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(bdFacaOBem);
-        Cursor cursorProdutoDetalhe = tableProdutoDetalhe.query(BdTableProdutoDetalhe.TODOS_CAMPOS, BdTableProdutoDetalhe._ID + " =?", new String[]{String.valueOf(idProdutoDetalhe)}, null, null, null);
-        assertEquals(1, cursorProdutoDetalhe.getCount());
-
-        assertTrue(cursorProdutoDetalhe.moveToNext());
-
-        ProdutoDetalheModelo produtoDetalheModelo = Converte.cursorToProdutoDetalhe(cursorProdutoDetalhe);
-        assertEquals("Cien", produtoDetalheModelo.getMarcaProduto());
-        cursorProdutoDetalhe.close();
-
-        produtoDetalheModelo.setMarcaProduto("Cien LTDA");
-
-        int registrosAlterados = tableProdutoDetalhe.update(Converte.produtoDetalheToContentValues(produtoDetalheModelo), BdTableProdutoDetalhe._ID + " =?", new String[]{String.valueOf(produtoDetalheModelo.getId())});
-        assertEquals(1, registrosAlterados);
-        bdFacaOBem.close();
-    }
-
-    @Test
-    public void consegueApagarProdutoDetalhe(){
-        Context appContext = getTargetContext();
-        BdFacaOBemOpenHelper openHelper = new BdFacaOBemOpenHelper(appContext);
-        SQLiteDatabase bdFacaOBem = openHelper.getWritableDatabase();
-
-        long id = insereProdutoDetalhe(bdFacaOBem, "Cien", "Esse produto deve ser direcionado ao centro de ajuda", "Alcool", 200, "Cintia", "13/06/2020", "contato@cien.com.br", "867599886");
-
-        BdTableProdutoDetalhe tableProdutoDetalhe = new BdTableProdutoDetalhe(bdFacaOBem);
-        int registroApagados = tableProdutoDetalhe.delete(BdTableProdutoDetalhe._ID + " =?", new String[]{String.valueOf(id)});
-        assertEquals(1, registroApagados);
-        bdFacaOBem.close();
-    }
 }
