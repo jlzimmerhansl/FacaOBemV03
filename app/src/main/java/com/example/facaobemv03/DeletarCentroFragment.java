@@ -1,58 +1,38 @@
 package com.example.facaobemv03;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DeletarCentroFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.facaobemv03.Models.CentroRecebimentoModelo;
+import com.google.android.material.snackbar.Snackbar;
+
+
 public class DeletarCentroFragment extends Fragment {
+    private TextView textViewNomeCentro;
+    private TextView textViewEndereco;
+    private TextView textViewCidade;
+    private TextView textViewCep;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DeletarCentroFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DeletarCentroFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DeletarCentroFragment newInstance(String param1, String param2) {
-        DeletarCentroFragment fragment = new DeletarCentroFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    CentroRecebimentoModelo centroRecebimentoModelo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -60,5 +40,88 @@ public class DeletarCentroFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_deletar_centro, container, false);
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        Context context = getContext();
+
+        Doador activity = (Doador) getActivity();
+        activity.setFragmentActual(this);
+        activity.setMenuActual(R.menu.menu_deletar_centro);
+
+        textViewNomeCentro = (TextView) view.findViewById(R.id.textViewNOmeInstituicao);
+        textViewEndereco = (TextView) view.findViewById(R.id.textViewEndereco);
+        textViewCidade = (TextView) view.findViewById(R.id.textViewCidade);
+        textViewCep = (TextView) view.findViewById(R.id.textViewCep);
+
+        Button btnDelete = (Button) view.findViewById(R.id.btnDeleteCentro);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteCentro();
+            }
+        });
+
+        Button btnCancelarDelete = (Button) view.findViewById(R.id.btnCancelaDeletarCentro);
+        btnCancelarDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelarDeletarCentro();
+            }
+        });
+
+        centroRecebimentoModelo = activity.getCentreoRecebimento();
+        textViewNomeCentro.setText(centroRecebimentoModelo.getNomeInstituicao());
+        textViewEndereco.setText(centroRecebimentoModelo.getEndereco());
+        textViewCidade.setText(centroRecebimentoModelo.getCidade());
+        textViewCep.setText(centroRecebimentoModelo.getCep());
+    }
+
+    public void cancelarDeletarCentro() {
+        NavController navController = NavHostFragment.findNavController(DeletarCentroFragment.this);
+        navController.navigate(R.id.action_deletarCentroFragment_to_listaCentroRecebimentoFragment);
+    }
+
+    public void deleteCentro() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle("Eliminar Centro");
+        builder.setMessage("Tem certeza que deseja eliminar o centro '" + centroRecebimentoModelo.getNomeInstituicao() + "'");
+        builder.setIcon(R.drawable.ic_baseline_delete_24);
+        builder.setPositiveButton("Sim, deletar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                confimarDelecaoCentro();
+            }
+        });
+
+        builder.setNegativeButton("Não, cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                cancelarDeletarCentro();
+            }
+        });
+
+        builder.show();
+    }
+
+    public void confimarDelecaoCentro() {
+        try {
+            Uri enderecoCentro = Uri.withAppendedPath(FacaOBemrContentProvider.ENDERECO_CENTRO, String.valueOf(centroRecebimentoModelo.getId()));
+
+            int apagados = getActivity().getContentResolver().delete(enderecoCentro, null, null);
+
+            if(apagados == 1){
+                Toast.makeText(getContext(), R.string.msgSucessEliminarCentro, Toast.LENGTH_SHORT).show();
+                NavController navController = NavHostFragment.findNavController(DeletarCentroFragment.this);
+                navController.navigate(R.id.action_deletarCentroFragment_to_listaCentroRecebimentoFragment);
+                return;
+            }
+
+        } catch (Exception e) {
+            Snackbar.make(textViewNomeCentro, R.string.msgErrorEliminarCentro, Snackbar.LENGTH_INDEFINITE).show();
+        }
     }
 }

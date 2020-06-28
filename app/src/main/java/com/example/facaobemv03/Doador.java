@@ -140,8 +140,22 @@ public class Doador extends AppCompatActivity {
         else if(menuActual == R.menu.menu_alterar_centro){
             if(processaOpcoesAlteraCentro(id)) return true;
         }
+        else if(menuActual == R.menu.menu_deletar_centro){
+            if(processaOpcoesDeletaCentro(id)) return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean processaOpcoesDeletaCentro(int id) {
+        DeletarCentroFragment deletarCentroFragment = (DeletarCentroFragment) fragmentActual;
+
+        if(id == R.id.action_cancelarDeletaCentro){
+            deletarCentroFragment.cancelarDeletarCentro();
+            return true;
+        }
+
+        return false;
     }
 
     private boolean processaOpcoesAlteraCentro(int id) {

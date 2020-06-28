@@ -70,4 +70,8 @@
     <string name="lblAlterarCentro">Change Center</string>
     <string name="msgUpdateCentroSucess">Centro alterado com sucesso</string>
     <string name="msgErrorAlterarCentro">Erro ao alterar centro</string>
+    <string name="lblDeletaCentro">Delete Center</string>
+    <string name="btnDeleteCentro">Delete Centro</string>
+    <string name="msgSucessEliminarCentro">Centro deletado com sucesso</string>
+    <string name="msgErrorEliminarCentro">Erro ao deletar centro!</string>
 </resources>
