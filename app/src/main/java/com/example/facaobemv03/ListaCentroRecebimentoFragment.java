@@ -1,58 +1,40 @@
 package com.example.facaobemv03;
 
+import android.content.Context;
+import android.content.CursorLoader;
+import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CursorAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListaCentroRecebimentoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ListaCentroRecebimentoFragment extends Fragment {
+import com.example.facaobemv03.database.BdTableCentrosRecebimento;
+import com.example.facaobemv03.database.BdTableDoador;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class ListaCentroRecebimentoFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
-    public ListaCentroRecebimentoFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListaCentroRecebimentoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ListaCentroRecebimentoFragment newInstance(String param1, String param2) {
-        ListaCentroRecebimentoFragment fragment = new ListaCentroRecebimentoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private AdaptadorCentro adaptadorCentro;
+    private int id_CursorLoader_Centros= 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -60,5 +42,65 @@ public class ListaCentroRecebimentoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_lista_centro_recebimento, container, false);
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Context context = getContext();
+
+        Doador activity = (Doador) getActivity();
+        activity.setFragmentActual(this);
+        activity.setMenuActual(R.menu.menu_lista_centro);
+
+
+        RecyclerView recyclerViewCentros = (RecyclerView) view.findViewById(R.id.recycleViewCentros);
+        adaptadorCentro = new AdaptadorCentro(context);
+        recyclerViewCentros.setAdapter(adaptadorCentro);
+        recyclerViewCentros.setLayoutManager(new LinearLayoutManager(context));
+
+        adaptadorCentro.setCursor(null);
+        LoaderManager.getInstance(this).initLoader(id_CursorLoader_Centros, null,  this);
+    }
+
+    public void alteraCentro(){
+        NavController navController = NavHostFragment.findNavController(ListaCentroRecebimentoFragment.this);
+        navController.navigate(R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment);
+    }
+
+    public void novoDoador(){
+        NavController navController = NavHostFragment.findNavController(ListaCentroRecebimentoFragment.this);
+        navController.navigate(R.id.action_ListaDoadoresFragment_to_AdicionaDoadoresFragment);
+    }
+
+    public void deletarDoador(){
+        NavController navController = NavHostFragment.findNavController(ListaCentroRecebimentoFragment.this);
+        navController.navigate(R.id.action_ListaDoadoresFragment_to_eliminaDoadoresFragment);
+    }
+
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        return new androidx.loader.content.CursorLoader(
+                getContext(),
+                FacaOBemrContentProvider.ENDERECO_CENTRO,
+                BdTableCentrosRecebimento.TODOS_CAMPOS,
+                null,
+                null,
+                BdTableCentrosRecebimento.CAMPO_NOME_CENTRO
+        );
+    }
+
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        adaptadorCentro.setCursor(data);
+    }
+
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        adaptadorCentro.setCursor(null);
     }
 }
