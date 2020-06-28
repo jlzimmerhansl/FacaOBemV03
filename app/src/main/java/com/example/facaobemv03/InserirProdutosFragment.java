@@ -32,7 +32,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class InserirProdutosFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private TextView llblNomeDoador;
+
     private EditText editTextNomeProduto;
     private EditText editTextQuantidade;
     private EditText editTextMarca;
@@ -41,7 +41,6 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
     public static final int ID_CURSOR_LOADER_DOADORES = 0;
 
 
-    private DoadorModelo doadorModelo;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,6 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
         activity.setFragmentActual(this);
         activity.setMenuActual(R.menu.menu_inserir_produto);
 
-        llblNomeDoador = (TextView) view.findViewById(R.id.lblNomeDoador);
         editTextNomeProduto = (EditText) view.findViewById(R.id.inputNomeProduto);
         editTextQuantidade = (EditText) view.findViewById(R.id.inputQuantidade);
         spennerDoadores = (Spinner) view.findViewById(R.id.spinnerDoadores);
@@ -79,7 +77,6 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
     public void cancelarCadastroProduto(){
         NavController navController = NavHostFragment.findNavController(InserirProdutosFragment.this);
         navController.navigate(R.id.action_inserirProdutosFragment_to_LIstaProdutosFragment);
-        llblNomeDoador.setText("");
         editTextNomeProduto.setText("");
         editTextQuantidade.setText("");
     }
@@ -99,22 +96,18 @@ public class InserirProdutosFragment extends Fragment implements LoaderManager.L
             return;
         }
 
-        Doador activity = (Doador) getActivity();
-        doadorModelo = activity.getDoadorModelo();
+        long idDoador = spennerDoadores.getSelectedItemId();
 
         ProdutoModelo produtoModelo = new ProdutoModelo();
         produtoModelo.setNomeProduto(nomeProduto);
         produtoModelo.setQuantidade(qtdProduto);
-       // produtoModelo.setIdDoador(doadorModelo.getId());
+        produtoModelo.setIdDoador(idDoador);
 
         try {
             getActivity().getContentResolver().insert(FacaOBemrContentProvider.ENDERECO_PRODUTO, Converte.produtoToContentValues(produtoModelo));
             Toast.makeText(getContext(), R.string.msgSuccessProduct, Toast.LENGTH_SHORT).show();
             NavController navController = NavHostFragment.findNavController(InserirProdutosFragment.this);
             navController.navigate(R.id.action_inserirProdutosFragment_to_LIstaProdutosFragment);
-
-            editTextNomeProduto.setText("");
-            editTextQuantidade.setText("");
         } catch (Exception e) {
             Snackbar.make(editTextNomeProduto, R.string.msgErrorInserirProduto, Snackbar.LENGTH_SHORT).show();
         }
