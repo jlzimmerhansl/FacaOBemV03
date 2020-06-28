@@ -154,5 +154,41 @@
         <action
             android:id="@+id/action_listaCentroRecebimentoFragment_to_ListaDoadoresFragment2"
             app:destination="@id/ListaDoadoresFragment" />
+        <action
+            android:id="@+id/action_listaCentroRecebimentoFragment_to_alterarCentroFragment"
+            app:destination="@id/alterarCentroFragment" />
+        <action
+            android:id="@+id/action_listaCentroRecebimentoFragment_to_deletarCentroFragment"
+            app:destination="@id/deletarCentroFragment" />
+        <action
+            android:id="@+id/action_listaCentroRecebimentoFragment_to_adicionarCentroFragment"
+            app:destination="@id/adicionarCentroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alterarCentroFragment"
+        android:name="com.example.facaobemv03.AlterarCentroFragment"
+        android:label="fragment_alterar_centro"
+        tools:layout="@layout/fragment_alterar_centro" >
+        <action
+            android:id="@+id/action_alterarCentroFragment_to_listaCentroRecebimentoFragment"
+            app:destination="@id/listaCentroRecebimentoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deletarCentroFragment"
+        android:name="com.example.facaobemv03.DeletarCentroFragment"
+        android:label="fragment_deletar_centro"
+        tools:layout="@layout/fragment_deletar_centro" >
+        <action
+            android:id="@+id/action_deletarCentroFragment_to_listaCentroRecebimentoFragment"
+            app:destination="@id/listaCentroRecebimentoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adicionarCentroFragment"
+        android:name="com.example.facaobemv03.AdicionarCentroFragment"
+        android:label="fragment_adicionar_centro"
+        tools:layout="@layout/fragment_adicionar_centro" >
+        <action
+            android:id="@+id/action_adicionarCentroFragment_to_listaCentroRecebimentoFragment"
+            app:destination="@id/listaCentroRecebimentoFragment" />
     </fragment>
 </navigation>
