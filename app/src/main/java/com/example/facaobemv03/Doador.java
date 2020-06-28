@@ -260,6 +260,11 @@ public class Doador extends AppCompatActivity {
             listaDoadoresFragment.mostraListaProdutos();
             return true;
         }
+
+        else if(id == R.id.action_lista_instituicoes){
+            listaDoadoresFragment.mostraListaCentrosRecebimento();
+            return true;
+        }
         return false;
     }
 }

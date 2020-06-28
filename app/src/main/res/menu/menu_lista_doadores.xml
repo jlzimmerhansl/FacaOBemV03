@@ -31,4 +31,9 @@
         android:title="Ver Produtos"
         android:visible="true"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_lista_instituicoes"
+        android:icon="@drawable/ic_baseline_account_balance_24"
+        android:title="Ver Instituições"
+        app:showAsAction="ifRoom" />
 </menu>

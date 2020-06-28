@@ -85,6 +85,11 @@ public class ListaDoadoresFragment extends Fragment implements LoaderManager.Loa
         navController.navigate((R.id.action_ListaDoadoresFragment_to_LIstaProdutosFragment));
     }
 
+    public void mostraListaCentrosRecebimento(){
+        NavController navController = NavHostFragment.findNavController(ListaDoadoresFragment.this);
+        navController.navigate((R.id.action_ListaDoadoresFragment_to_listaCentroRecebimentoFragment));
+    }
+
 
     /**
      * Instantiate and return a new Loader for the given ID.
