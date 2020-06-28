@@ -118,8 +118,21 @@ public class Doador extends AppCompatActivity {
         else if(menuActual == R.menu.menu_detalhe_produto){
             if(processaOpcoesDetalheProdutos(id)) return true;
         }
+        else if(menuActual == R.menu.menu_detalhe_doador){
+            if(processaOpcoesDetalheDoador(id)) return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean processaOpcoesDetalheDoador(int id) {
+        DetalheDoadorFragment detalheDoadorFragment = ( DetalheDoadorFragment) fragmentActual;
+
+        if (id == R.id.action_cancelarDetalheDoador){
+            detalheDoadorFragment.cancelarDeletarDoador();
+            return true;
+        }
+        return false;
     }
 
     private boolean processaOpcoesDetalheProdutos(int id) {

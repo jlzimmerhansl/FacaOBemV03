@@ -52,30 +52,6 @@ public class DetalheDoadorFragment extends Fragment {
         textViewEmailDoador = (TextView) view.findViewById(R.id.lblEmailDoador);
         textViewTelefoneDoador = (TextView) view.findViewById(R.id.lblTelefoneDoador);
 
-        Button btnCadastraProduto = (Button) view.findViewById(R.id.btnCadastrarProduto);
-        btnCadastraProduto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cadastraProduto();
-            }
-        });
-
-        Button btnCancelarDetalhe = (Button) view.findViewById(R.id.btn_cancelarDeletarDoador);
-        btnCancelarDetalhe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancelarDeletarDoador();
-            }
-        });
-
-        Button btnVerListaProdutos = (Button) view.findViewById(R.id.btnVerListaProdutos);
-        btnVerListaProdutos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listaProdutos();
-            }
-        });
-
         doadorModelo = activity.getDoadorModelo();
         textViewNomeDoador.setText(doadorModelo.getNomeDoador());
         textViewDataDoacao.setText(doadorModelo.getDataDoacao());
@@ -83,15 +59,6 @@ public class DetalheDoadorFragment extends Fragment {
         textViewTelefoneDoador.setText(doadorModelo.getTelefoneDoador());
     }
 
-    private void listaProdutos() {
-        NavController navController = NavHostFragment.findNavController(DetalheDoadorFragment.this);
-        navController.navigate(R.id.action_detalheDoadorFragment_to_LIstaProdutosFragment);
-    }
-
-    private void cadastraProduto() {
-        NavController navController = NavHostFragment.findNavController(DetalheDoadorFragment.this);
-        navController.navigate(R.id.action_detalheDoadorFragment_to_inserirProdutosFragment);
-    }
 
     public void cancelarDeletarDoador() {
         NavController navController = NavHostFragment.findNavController(DetalheDoadorFragment.this);
