@@ -53,7 +53,7 @@
     <string name="msgErrorEliminarProduto">Produto deletado com sucesso</string>
     <string name="lblDetalheProduto">Detalhes do Produto</string>
     <string name="lblListaCentros">Centros de Recebimento</string>
-    <string name="lblAdicionaCentro">Adiciona Centros de Recolhimento</string>
+    <string name="lblAdicionaCentro">Adiciona Centros</string>
     <string name="inputNemoCentro">Nome da Instituição:</string>
     <string name="inputEndereco">Endereço:</string>
     <string name="inputCidade">Cidade:</string>
@@ -64,4 +64,7 @@
     <string name="msgErrorCep">Preencha o cep</string>
     <string name="msgCentroInserido">Centro inserido com sucesso!</string>
     <string name="msgErrorInserirCentro">Erro ao inserir Centro!</string>
+    <string name="lblAlterarCentro">Alterar Centro</string>
+    <string name="msgUpdateCentroSucess">Centro alterado com sucesso</string>
+    <string name="msgErrorAlterarCentro">Erro ao alterar centro</string>
 </resources>

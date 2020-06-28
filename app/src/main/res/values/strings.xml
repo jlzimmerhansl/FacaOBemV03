@@ -67,4 +67,7 @@
     <string name="msgErrorCep">Preencha o cep</string>
     <string name="msgCentroInserido">Centro inserido com sucesso!</string>
     <string name="msgErrorInserirCentro">Erro ao inserir Centro!</string>
+    <string name="lblAlterarCentro">Change Center</string>
+    <string name="msgUpdateCentroSucess">Centro alterado com sucesso</string>
+    <string name="msgErrorAlterarCentro">Erro ao alterar centro</string>
 </resources>

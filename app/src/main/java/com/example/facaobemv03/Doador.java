@@ -31,6 +31,8 @@ public class Doador extends AppCompatActivity {
        return produtoModelo;
    }
 
+   public CentroRecebimentoModelo getCentreoRecebimento(){return centroRecebimentoModelo;}
+
     public void setFragmentActual(Fragment fragmentActual){
         this.fragmentActual = fragmentActual;
 
@@ -135,8 +137,24 @@ public class Doador extends AppCompatActivity {
         else if(menuActual == R.menu.menu_adicionar_centro){
             if(processaOpcoesAdicionaCentro(id)) return true;
         }
+        else if(menuActual == R.menu.menu_alterar_centro){
+            if(processaOpcoesAlteraCentro(id)) return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean processaOpcoesAlteraCentro(int id) {
+        AlterarCentroFragment alterarCentroFragment = (AlterarCentroFragment) fragmentActual;
+        if(id == R.id.action_guardarAlterarCentro){
+            alterarCentroFragment.alterarCentro();
+            return true;
+        }
+        else if(id == R.id.action_cancelarListaCentroAlterar){
+            alterarCentroFragment.cancelaAlterarCentro();
+            return true;
+        }
+        return false;
     }
 
     private boolean processaOpcoesAdicionaCentro(int id) {
