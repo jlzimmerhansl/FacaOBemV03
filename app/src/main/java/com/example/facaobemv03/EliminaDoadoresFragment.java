@@ -84,7 +84,7 @@ public class EliminaDoadoresFragment extends Fragment {
     public void deleteDoador() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        builder.setTitle("Eliminar Livro");
+        builder.setTitle("Eliminar Doador");
         builder.setMessage("Tem certeza que deseja eliminar o doador '" + doadorModelo.getNomeDoador() + "'");
         builder.setIcon(R.drawable.ic_baseline_delete_24);
         builder.setPositiveButton("Sim, deletar", new DialogInterface.OnClickListener() {

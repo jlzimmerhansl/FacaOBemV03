@@ -27,9 +27,9 @@
     <string name="inputNomeDoadorAltera">Donor Name</string>
     <string name="inputEmailDoadorAltera">Donor\' s Email</string>
     <string name="inputTelefoneDoadorAltera">Donor\'s phone</string>
-    <string name="msgUpdateDoadorSucess">Livro guardado com sucesso</string>
-    <string name="msgErrorUpdateDoador">Erro: Não foi possível alterar o livro</string>
-    <string name="msgSucessEliminarDoador">Livro eliminado com sucesso</string>
+    <string name="msgUpdateDoadorSucess">Doador guardado com sucesso</string>
+    <string name="msgErrorUpdateDoador">Erro: Não foi possível alterar o doador</string>
+    <string name="msgSucessEliminarDoador">Doador eliminado com sucesso</string>
     <string name="msgErrorEliminarDoador">Erro: não foi possivel eliminar o doador</string>
     <string name="lblDetalheDoador">Donor\'s Details</string>
     <string name="btnCadastrarProduto">Add Product</string>
@@ -52,4 +52,6 @@
     <string name="lblDeleteProduto">Delete Productor</string>
     <string name="btnDeleteProduto">Delete Product</string>
     <string name="btnCancelaDeletar">Canceled</string>
+    <string name="msgSucessEliminarProduto">Produto deletado com sucesso</string>
+    <string name="msgErrorEliminarProduto">Produto deletado com sucesso</string>
 </resources>

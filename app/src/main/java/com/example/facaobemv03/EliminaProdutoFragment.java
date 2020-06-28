@@ -1,58 +1,38 @@
 package com.example.facaobemv03;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.facaobemv03.Models.ProdutoModelo;
+import com.google.android.material.snackbar.Snackbar;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EliminaProdutoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EliminaProdutoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private TextView textViewNomeProduto;
+    private TextView textViewQuantidade;
+    private TextView textViewNomeDoadorItem;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ProdutoModelo produtoModelo;
 
-    public EliminaProdutoFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EliminaProdutoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EliminaProdutoFragment newInstance(String param1, String param2) {
-        EliminaProdutoFragment fragment = new EliminaProdutoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -60,5 +40,87 @@ public class EliminaProdutoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_elimina_produto, container, false);
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        Context context = getContext();
+
+        Doador activity = (Doador) getActivity();
+        activity.setFragmentActual(this);
+        activity.setMenuActual(R.menu.menu_deletar_produto);
+
+        textViewNomeProduto = (TextView) view.findViewById(R.id.textViewNomeProduto);
+        textViewQuantidade = (TextView) view.findViewById(R.id.textViewQuantidade);
+        textViewNomeDoadorItem = (TextView) view.findViewById(R.id.textViewNomeDoadorItem);
+
+
+        Button btnDelete = (Button) view.findViewById(R.id.btnDeleteProduto);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteProduto();
+            }
+        });
+
+        Button btnCancelarDelete = (Button) view.findViewById(R.id.btnCancelaDeletar);
+        btnCancelarDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelarDeletarProduto();
+            }
+        });
+
+        produtoModelo = activity.getProdutoModelo();
+        textViewNomeProduto.setText(produtoModelo.getNomeProduto());
+        textViewQuantidade.setText(String.valueOf(produtoModelo.getQuantidade()));
+        textViewNomeDoadorItem.setText(produtoModelo.getDoador());
+    }
+
+    public void cancelarDeletarProduto() {
+        NavController navController = NavHostFragment.findNavController(EliminaProdutoFragment.this);
+        navController.navigate(R.id.action_eliminaProdutoFragment_to_LIstaProdutosFragment);
+    }
+
+    public void deleteProduto() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle("Eliminar Produto");
+        builder.setMessage("Tem certeza que deseja eliminar o produto '" + produtoModelo.getNomeProduto() + "'");
+        builder.setIcon(R.drawable.ic_baseline_delete_24);
+        builder.setPositiveButton("Sim, deletar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                confimarDelecaoProduto();
+            }
+        });
+
+        builder.setNegativeButton("Não, cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                cancelarDeletarProduto();
+            }
+        });
+
+        builder.show();
+    }
+
+    public void confimarDelecaoProduto() {
+        try {
+            Uri enderecoProdutos = Uri.withAppendedPath(FacaOBemrContentProvider.ENDERECO_PRODUTO, String.valueOf(produtoModelo.getId()));
+
+            int apagados = getActivity().getContentResolver().delete(enderecoProdutos, null, null);
+
+            if(apagados == 1){
+                Toast.makeText(getContext(), R.string.msgSucessEliminarProduto, Toast.LENGTH_SHORT).show();
+                NavController navController = NavHostFragment.findNavController(EliminaProdutoFragment.this);
+                navController.navigate(R.id.action_eliminaProdutoFragment_to_LIstaProdutosFragment);
+                return;
+            }
+
+        } catch (Exception e) {
+            Snackbar.make(textViewNomeProduto, R.string.msgErrorEliminarProduto, Snackbar.LENGTH_INDEFINITE).show();
+        }
     }
 }

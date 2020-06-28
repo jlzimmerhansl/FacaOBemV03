@@ -49,4 +49,6 @@
     <string name="lblDeleteProduto">Delete Produto:</string>
     <string name="btnDeleteProduto">Deletar Produto</string>
     <string name="btnCancelaDeletar">Cancelar</string>
+    <string name="msgSucessEliminarProduto">Produto deletado com sucesso</string>
+    <string name="msgErrorEliminarProduto">Produto deletado com sucesso</string>
 </resources>

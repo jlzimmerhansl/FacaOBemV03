@@ -107,8 +107,22 @@ public class Doador extends AppCompatActivity {
         else if(menuActual == R.menu.menu_alterar_produto){
             if(processaOpcoesMenuAlterarProdutos(id)) return true;
         }
+        else if(menuActual == R.menu.menu_deletar_produto){
+            if(processaOpcoesDeletarProdutos(id)) return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean processaOpcoesDeletarProdutos(int id) {
+        EliminaProdutoFragment eliminaProdutoFragment = (EliminaProdutoFragment) fragmentActual;
+
+        if(id == R.id.action_eliminaProdutoFragment_to_LIstaProdutosFragment){
+            eliminaProdutoFragment.cancelarDeletarProduto();
+            return true;
+        }
+
+        return false;
     }
 
     private boolean processaOpcoesMenuAlterarProdutos(int id) {
