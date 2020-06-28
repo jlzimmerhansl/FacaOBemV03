@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_guardar_centro"
+        android:icon="@drawable/ic_save_black_24dp"
+        android:title="Inserir"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_cancelar_inserirCentro"
+        android:icon="@drawable/ic_cancel_black_24dp"
+        android:title="Cancelar"
+        app:showAsAction="ifRoom" />
+</menu>

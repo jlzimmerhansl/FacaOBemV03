@@ -28,8 +28,8 @@ public class FacaOBemrContentProvider extends ContentProvider {
     public static final int URI_ID_PRODUTO = 201;
     public static final int URI_PRODUTO = 200;
     public static final int URI_PRODUTOSelecao = 202;
-    public static final int URI_ID_CENTRO = 300;
-    public static final int URI_CENTRO = 301;
+    public static final int URI_ID_CENTRO = 301;
+    public static final int URI_CENTRO = 300;
 
     public static final String Cursor_dir = "vnd.android.cursor.dir/";
     public static final String Cursor_item = "vnd.android.cursor.item/";
@@ -125,8 +125,10 @@ public class FacaOBemrContentProvider extends ContentProvider {
             case URI_PRODUTO:
                 id = new BdTableProduto(bd).insert(contentValues);
                 break;
-            case URI_ID_CENTRO:
+            case URI_CENTRO:
                 id = new BdTableCentrosRecebimento(bd).insert(contentValues);
+                break;
+
             default:
                 throw new UnsupportedOperationException("Endereco insert não suportado" + uri.getPath());
         }
