@@ -43,4 +43,5 @@
     <string name="btnVerProdutos">Ver Produtos</string>
     <string name="inputMarcaProduto">Marca do produto:</string>
     <string name="inputDescription">Descrição:</string>
+    <string name="lblAlteraProduto">Alterar Produto</string>
 </resources>

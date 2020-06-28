@@ -46,4 +46,5 @@
     <string name="btnVerProdutos">See Products</string>
     <string name="inputMarcaProduto">Brand of the product</string>
     <string name="inputDescription">Description</string>
+    <string name="lblAlteraProduto">Change Product</string>
 </resources>
