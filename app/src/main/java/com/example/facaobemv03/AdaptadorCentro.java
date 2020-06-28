@@ -54,7 +54,8 @@ public class AdaptadorCentro  extends RecyclerView.Adapter<AdaptadorCentro.ViewH
         return cursor.getCount();
     }
 
-    public class ViewHolderCentro extends RecyclerView.ViewHolder {
+    private AdaptadorCentro.ViewHolderCentro viewHolderCentroSelecionado = null;
+    public class ViewHolderCentro extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView textViewNomeInstituicao;
         private final TextView TextViewEndereco;
         private final TextView TextViewCidade;
@@ -68,6 +69,8 @@ public class AdaptadorCentro  extends RecyclerView.Adapter<AdaptadorCentro.ViewH
             TextViewEndereco = (TextView) itemView.findViewById(R.id.textViewEndereco);
             TextViewCidade = (TextView) itemView.findViewById(R.id.textViewCidade);
             TextViewCep = (TextView) itemView.findViewById(R.id.textViewCep);
+
+            itemView.setOnClickListener(this);
         }
 
         public void setCentro(CentroRecebimentoModelo centroRecebimentoModelo){
@@ -78,6 +81,31 @@ public class AdaptadorCentro  extends RecyclerView.Adapter<AdaptadorCentro.ViewH
             TextViewCidade.setText(centroRecebimentoModelo.getCidade());
             TextViewCep.setText(centroRecebimentoModelo.getCep());
 
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(viewHolderCentroSelecionado == this){
+                return;
+            }
+
+            if(viewHolderCentroSelecionado != null){
+                viewHolderCentroSelecionado.tirarSelecao();
+            }
+
+            viewHolderCentroSelecionado = this;
+            selecionaItem();
+
+            Doador activity = (Doador) AdaptadorCentro.this.context;
+            activity.centroAlterado(centroRecebimentoModelo);
+        }
+
+        private void selecionaItem() {
+            itemView.setBackgroundResource(R.color.Gray);
+        }
+
+        private void tirarSelecao() {
+            itemView.setBackgroundResource(R.color.primaryTextColor);
         }
     }
 }

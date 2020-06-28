@@ -65,17 +65,22 @@ public class ListaCentroRecebimentoFragment extends Fragment implements LoaderMa
 
     public void alteraCentro(){
         NavController navController = NavHostFragment.findNavController(ListaCentroRecebimentoFragment.this);
-        navController.navigate(R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment);
+        navController.navigate(R.id.action_listaCentroRecebimentoFragment_to_alterarCentroFragment);
     }
 
-    public void novoDoador(){
+    public void novoCentro(){
         NavController navController = NavHostFragment.findNavController(ListaCentroRecebimentoFragment.this);
-        navController.navigate(R.id.action_ListaDoadoresFragment_to_AdicionaDoadoresFragment);
+        navController.navigate(R.id.action_listaCentroRecebimentoFragment_to_adicionarCentroFragment);
     }
 
-    public void deletarDoador(){
+    public void deletarCentro(){
         NavController navController = NavHostFragment.findNavController(ListaCentroRecebimentoFragment.this);
-        navController.navigate(R.id.action_ListaDoadoresFragment_to_eliminaDoadoresFragment);
+        navController.navigate(R.id.action_listaCentroRecebimentoFragment_to_deletarCentroFragment);
+    }
+
+    public void cancelaLista(){
+        NavController navController = NavHostFragment.findNavController(ListaCentroRecebimentoFragment.this);
+        navController.navigate(R.id.action_listaCentroRecebimentoFragment_to_ListaDoadoresFragment);
     }
 
 

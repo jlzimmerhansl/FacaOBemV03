@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.facaobemv03.Models.CentroRecebimentoModelo;
 import com.example.facaobemv03.Models.DoadorModelo;
 import com.example.facaobemv03.Models.ProdutoDetalheModelo;
 import com.example.facaobemv03.Models.ProdutoModelo;
@@ -20,7 +21,7 @@ public class Doador extends AppCompatActivity {
     private Menu menu;
     private DoadorModelo doadorModelo = null;
     private ProdutoModelo produtoModelo;
-    private ProdutoDetalheModelo produtoDetalheModelo = null;
+    private CentroRecebimentoModelo centroRecebimentoModelo = null;
 
    public DoadorModelo getDoadorModelo(){
        return doadorModelo;
@@ -29,8 +30,6 @@ public class Doador extends AppCompatActivity {
    public ProdutoModelo getProdutoModelo(){
        return produtoModelo;
    }
-
-   public ProdutoDetalheModelo getProdutoMOdeloDetalhe(){return produtoDetalheModelo;}
 
     public void setFragmentActual(Fragment fragmentActual){
         this.fragmentActual = fragmentActual;
@@ -65,6 +64,15 @@ public class Doador extends AppCompatActivity {
         menu.findItem(R.id.action_ListaDoadoresFragment_to_alteraDoadoresFragment).setVisible(mostraMenuEditarEliminar);
         menu.findItem(R.id.action_deletar_doador).setVisible(mostraMenuEditarEliminar);
         menu.findItem(R.id.action_ListaDoadores_to_DetalheDoador).setVisible(mostraMenuEditarEliminar);
+    }
+
+    public void centroAlterado(CentroRecebimentoModelo centroRecebimentoModelo){
+
+        this.centroRecebimentoModelo = centroRecebimentoModelo;
+        boolean mostraMenuEditarEliminar = (centroRecebimentoModelo != null);
+
+        menu.findItem(R.id.action_alterarCentro).setVisible(mostraMenuEditarEliminar);
+        menu.findItem(R.id.action_deletarCentro).setVisible(mostraMenuEditarEliminar);
     }
 
     public void atualizaOpcoesDeMenuListaProdutos(ProdutoModelo produtoModelo){
@@ -121,8 +129,28 @@ public class Doador extends AppCompatActivity {
         else if(menuActual == R.menu.menu_detalhe_doador){
             if(processaOpcoesDetalheDoador(id)) return true;
         }
+        else if(menuActual == R.menu.menu_lista_centro){
+            if(processaOpcoesListaCentro(id)) return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean processaOpcoesListaCentro(int id) {
+        ListaCentroRecebimentoFragment listaCentroRecebimentoFragment = (ListaCentroRecebimentoFragment) fragmentActual;
+        if(id == R.id.action_inserirCentro){
+            listaCentroRecebimentoFragment.novoCentro();
+        }
+        else if(id == R.id.action_alterarCentro){
+            listaCentroRecebimentoFragment.alteraCentro();
+        }
+        else if(id == R.id.action_deletarCentro){
+            listaCentroRecebimentoFragment.deletarCentro();
+        }
+        else if(id == R.id.action_cancelarListaCentro){
+            listaCentroRecebimentoFragment.cancelaLista();
+        }
+        return false;
     }
 
     private boolean processaOpcoesDetalheDoador(int id) {
